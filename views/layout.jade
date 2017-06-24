@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/mui.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    script(src="/javascripts/jquery-2.2.0.min.js")
+  body.hide-sidedrawer
+    #sidedrawer.mui--no-user-select
+      #sidedrawer-brand.mui--appbar-line-height
+        span.mui--text-title Hansell Kopp
+      .mui-divider
+        ul
+          li
+            strong Category 1
+            ul
+              li
+                a(href="#") Item 1
+              li
+                a(href="#") Item 2
+              li
+                a(href="#") Item 3        
+    header#header
+      .mui-appbar.mui--appbar-line-height
+        .mui-container-fluid
+          a.sidedrawer-toggle.mui--visible-xs-inline-block.mui--visible-sm-inline-block.js-show-sidedrawer ☰
+          a.sidedrawer-toggle.mui--hidden-xs.mui--hidden-sm.js-hide-sidedrawer ☰
+            span.mui--text-title.mui--visible-xs-inline-block Hansell Kopp
+          = title
+    #content-wrapper
+      .mui--appbar-height
+      .mui-container-fluid
+        block content
+    footer.footer
+      .mui-container-fluid
+        p Made with ♥ in <a href="https://en.wikipedia.org/wiki/Berlin">Berlin</a>
+  script(src="/javascripts/mui.min.js")
+  script(src="/javascripts/index.js")
+  script(src="/javascripts/components.js")

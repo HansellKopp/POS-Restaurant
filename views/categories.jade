@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1= title
+
+  h2 Create a new Category
+  form(action="/categories/create", method="post")
+    input(type="text", name="description")
+    input(type="submit")
+
+  h2 Categories
+
+  ul
+  each category in categories
+    li
+      = category.description
+      | &nbsp;
+      | (
+      a(href="/categories/" + category.id + "/destroy") Destroy
+      | )
+      ul
+        li
+          | Create a new product:
+          form(action="/categories/" + category.id + "/product/create", method="post", style="display: inline")
+            input(type="number", name="number")
+            input(type="text", name="name")
+            input(type="text", name="description")
+            input(type="text", name="image_url")
+            input(type="submit")
+        each product in category.Products
+          li
+            = product.number
+            = product.name
+            | &nbsp;
+            | (
+            a(href="/categories/" + category.id + "/products/" + product.id + "/destroy") Destroy
+            | )
