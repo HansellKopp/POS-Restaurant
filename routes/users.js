@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
     attributes: ['username','email','id']
   }).then(function(users) {
     res.render('./users/index', {
-      title: 'POS-Restaurants',
+      title: 'Users list',
       users: users
     })
   })
@@ -24,7 +24,7 @@ router.get('/', function(req, res) {
 //
 router.get('/create', function(req, res) {
     res.render('./users/create', {
-      title: 'POS-Restaurants - Create user',
+      title: 'Create user',
       user: ['username','email','password'],
       errors: ''
     })
@@ -38,7 +38,7 @@ router.get('/edit/:user_id', function(req, res) {
       id
     ).then(function(user) {
       res.render('./users/edit', {
-        title: 'POS-Restaurants - Edit user',
+        title: 'Edit user',
         user: user,
         errors: ''
       })
