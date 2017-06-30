@@ -120,8 +120,10 @@ function makeActionButton(icon, color, caption, onClick) {
     button.className = "mui-btn mui-btn--small"
     var i = document.createElement('i')
     i.className = `fa ${icon} ${color}`
-    i.appendChild(document.createTextNode(` ${caption}`))
+    var span = document.createElement('strong')
+    span.appendChild(document.createTextNode(` ${caption}`))
     button.appendChild(i)
+    button.appendChild(span)
     button.addEventListener("click", onClick);
     return button
 }

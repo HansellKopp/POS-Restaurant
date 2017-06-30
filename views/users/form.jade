@@ -1,6 +1,9 @@
 form#user.mui-form
   legend 
-    h2 Users
+    h2
+      i.fa.fa-user-circle-o
+      span &nbsp; Users
+      
   .mui-textfield
     input(type="text", name="username", value=user.username)
     label username
@@ -12,5 +15,6 @@ form#user.mui-form
     label password
   input(type='hidden' name='id' value=user.id id='id')
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
-    i.fa.fa-plus &nbsp; Save
+    i.fa.fa-floppy-o 
+    strong &nbsp; Save
     
