@@ -2,6 +2,9 @@
 
  Point of Sale
 
+## Runtime requiriments
+  nodejs  8.x
+  
 ## Install dependencies
   npm install
 

@@ -10,7 +10,6 @@ block content
   script.
     $(document).ready(function(){
         const data = JSON.parse(document.getElementById('payload').dataset.users)
-        $("#submit-button").click(onSubmitClick)
         $("#tableHeader").append(makeHeader(['Username','Email','id']));
         $("#tableBody").append(makeBody(data, onLinkClick ));
     })
@@ -23,7 +22,6 @@ block content
       var urlArray = element.href.split('/')
       var verb = urlArray[urlArray.length - 2]
       var id = urlArray[urlArray.length - 1]
-      console.log(element.href.split('/').length)
       switch( verb ) {
         case 'delete':
            $.delete(

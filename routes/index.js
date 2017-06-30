@@ -7,14 +7,10 @@ var router  = express.Router()
 models.sequelize.sync()
 
 router.get('/', function(req, res) {
-  models.User.findAll({
-    attributes: ['username','email','id']
-  }).then(function(users) {
-    res.render('index', {
-      title: 'POS-Restaurants',
-      users: users
-    })
-  })
+    res.redirect('/users/')
+    // res.render('index', {
+    //  title: 'POS-Restaurants',
+    // })
 })
 
 module.exports = router

@@ -40,7 +40,6 @@ router.delete('/:user_id', function(req, res) {
   }).then(function(data) {
     res.status(200).json({'data': data})
   }).catch(function(err){
-     console.log(err)
      res.status(500).json({'msg': err})
   })
 })
