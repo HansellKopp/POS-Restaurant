@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  include ./form
+  script.
+    $(document).ready(function(){
+      var form = $('#user')
+      var id = $('#id').val()
+      form.submit(function( event ){
+        event.preventDefault()
+        $.put(
+          `/api/users/${id}`,
+          form.serialize()
+          ).done(function( data ) {
+             window.location.href = '/users'
+          })
+        })
+    })

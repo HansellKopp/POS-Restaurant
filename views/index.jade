@@ -1,37 +1,5 @@
 extends layout
 
 block content
-  #payload(data-users=users)
-  form(action="/users/create", method="post", style="display: none")#formular.mui-form
-    legend Add new user
-    .mui-textfield
-      input(type="text", name="username")
-      label username
-    .mui-textfield
-      input(type="text", name="email")
-      label email
-    .mui-textfield
-      input(type="password", name="password")
-      label password
-    button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right Submit
-  table#table.mui-table.mui-table--bordered
-    caption.mui--text-left
-      h2 Users
-    thead#tableHeader
-    tbody#tableBody
-  script.
-    $(document).ready(function(){
-        const data = JSON.parse(document.getElementById('payload').dataset.users)
-        $("#submit-button").click(onSubmitClick)
-        $("#tableHeader").append(makeHeader(['Username','Email','id']));
-        $("#tableBody").append(makeBody(data));
-    })
-    function onAddClick() {
-      $("#formular").show(500)
-      $("#table").hide(500)
-    }
-    function onSubmitClick() {
-      $("#formular").hide(500)
-      $("#table").show(500)
-    }
+
 

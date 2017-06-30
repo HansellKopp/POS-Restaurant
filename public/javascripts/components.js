@@ -1,7 +1,48 @@
 // Generic components
 // Author Hansell Kopp
 //
+
+// Jquery Ajax extensions
+//
+// Ajax delete
+//
+$.delete = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
+        type = type || callback,
+            callback = data,
+            data = {}
+    }
+
+    return $.ajax({
+        url: url,
+        type: 'DELETE',
+        success: callback,
+        data: data,
+        contentType: type
+    })
+}
+
+// Jquery Ajax extensions
+//
+// Ajax put
+$.put = function(url, data, callback, type){
+    if ( $.isFunction(data) ){
+        type = type || callback,
+        callback = data,
+        data = {}
+    }
+    
+    return $.ajax({
+        url: url,
+        type: 'PUT',
+        success: callback,
+        data: data,
+        contentType: type
+    })
+}
+
 // Table header row
+//
 function makeHeader(item) {
     var fragment = document.createDocumentFragment();
     var row = document.createElement('tr')
@@ -24,8 +65,10 @@ function makeHeader(item) {
     fragment.append(row)
     return fragment
 }
+
 // Table body rows
-function makeBody(data) {
+//
+function makeBody(data, onLinkClick) {
     var fragment = document.createDocumentFragment()
     $.each(data, function(key, value) {
         var row = document.createElement('tr')
@@ -39,10 +82,20 @@ function makeBody(data) {
         }
         })
         // create actions buttons
-        var div = document.createElement('div')
+        var div = document.createElement('span')
         div.className = 'mui--pull-right'
-        div.appendChild(makeActionLink("/users/delete/" + value.id, 'fa-times', 'mui--text-accent'))
-        div.appendChild(makeActionLink("/users/edit/" + value.id, 'fa-pencil', 'mui--text-primary'))
+        div.appendChild(makeActionLink(
+            "/users/delete/" + value.id,
+            'fa-times',
+            'mui--text-accent',
+            onLinkClick
+            ))
+        div.appendChild(makeActionLink(
+            "/users/edit/" + value.id,
+            'fa-pencil',
+            'mui--text-primary',
+            onLinkClick
+            ))
         var cell = document.createElement('td')
         cell.append(div)
         row.appendChild(cell)
@@ -51,10 +104,11 @@ function makeBody(data) {
     return fragment
 }
 // Action link
-function makeActionLink(href,icon, color) {
+function makeActionLink(href,icon, color, onClick) {
     var actionLink = document.createElement('a')
     actionLink.href = href
     actionLink.className = "mui-btn mui-btn--small"
+    actionLink.addEventListener("click", onClick);
     var i = document.createElement('i')
     i.className = `fa ${icon} ${color}`
     actionLink.appendChild(i)

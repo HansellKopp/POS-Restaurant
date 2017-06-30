@@ -19,6 +19,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Database
+./db/*.sqlite
+
 # Optional npm cache directory
 .npm
 

@@ -1,0 +1,16 @@
+form#user.mui-form
+  legend 
+    h2 Users
+  .mui-textfield
+    input(type="text", name="username", value=user.username)
+    label username
+  .mui-textfield
+    input(type="text", name="email", value=user.email)
+    label email
+  .mui-textfield
+    input(type="password", name="password", value=user.password)
+    label password
+  input(type='hidden' name='id' value=user.id id='id')
+  button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+    i.fa.fa-plus &nbsp; Save
+    

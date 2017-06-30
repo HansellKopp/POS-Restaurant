@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  include ./form
+  script.
+    $(document).ready(function(){
+      $( "#user" ).submit(function( event ){
+        event.preventDefault()
+        $.post(
+          "/api/users",
+          $( "#user" ).serialize()
+          ).done(function( data ) {
+            window.location.href = `/users`
+          })
+      })
+    })

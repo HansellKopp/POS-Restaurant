@@ -4,44 +4,45 @@ var models  = require('../models')
 var express = require('express')
 var router  = express.Router()
 
-router.post('/create', function(req, res) {
-  models.User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  }).then(function() {
-    res.redirect('/')
+// update database schema
+models.sequelize.sync()
+
+// route users/ 
+//
+router.get('/', function(req, res) {
+  models.User.findAll({
+    attributes: ['username','email','id']
+  }).then(function(users) {
+    res.render('./users/index', {
+      title: 'POS-Restaurants',
+      users: users
+    })
   })
 })
 
-router.get('/:user_id/destroy', function(req, res) {
-  models.User.destroy({
-    where: {
-      id: req.params.user_id
-    }
-  }).then(function() {
-    res.redirect('/')
-  })
+// route users/create
+//
+router.get('/create', function(req, res) {
+    res.render('./users/create', {
+      title: 'POS-Restaurants - Create user',
+      user: ['username','email','password'],
+      errors: ''
+    })
 })
 
-router.post('/:user_id/tasks/create', function (req, res) {
-  models.Task.create({
-    title: req.body.title,
-    UserId: req.params.user_id
-  }).then(function() {
-    res.redirect('/')
-  })
+// route users/edit/id
+//
+router.get('/edit/:user_id', function(req, res) {
+    var id =  req.params.user_id
+    models.User.findById(
+      id
+    ).then(function(user) {
+      res.render('./users/edit', {
+        title: 'POS-Restaurants - Edit user',
+        user: user,
+        errors: ''
+      })
+    })
 })
-
-router.get('/:user_id/tasks/:task_id/destroy', function (req, res) {
-  models.Task.destroy({
-    where: {
-      id: req.params.task_id
-    }
-  }).then(function() {
-    res.redirect('/')
-  })
-})
-
 
 module.exports = router

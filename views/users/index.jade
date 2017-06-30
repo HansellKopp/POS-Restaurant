@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  #payload(data-users=users)
+  table#table.mui-table.mui-table--bordered
+    caption.mui--text-left
+      h2 Users
+    thead#tableHeader
+    tbody#tableBody
+  script.
+    $(document).ready(function(){
+        const data = JSON.parse(document.getElementById('payload').dataset.users)
+        $("#submit-button").click(onSubmitClick)
+        $("#tableHeader").append(makeHeader(['Username','Email','id']));
+        $("#tableBody").append(makeBody(data, onLinkClick ));
+    })
+
+    // manage Edit and Delete actions 
+    //
+    function onLinkClick( event ) {
+      event.preventDefault()
+      var element = event.srcElement.nodeName === 'I'? event.srcElement.parentNode : event.srcElement
+      var urlArray = element.href.split('/')
+      var verb = urlArray[urlArray.length - 2]
+      var id = urlArray[urlArray.length - 1]
+      console.log(element.href.split('/').length)
+      switch( verb ) {
+        case 'delete':
+           $.delete(
+            `/api/users/${id}`
+            ).done(function( data ) {
+            window.location.href = '/users/'
+          })
+        case 'edit':
+          window.location.href = `/users/edit/${id}`
+      }
+    }
+
+    // manage add button
+    //
+    function onAddClick() {
+      window.location.href = '/users/create'
+    }
