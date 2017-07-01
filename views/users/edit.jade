@@ -11,8 +11,7 @@ block content
         $.put(
           `/api/users/${id}`,
           form.serialize()
-          ).done(function( data ) {
-             window.location.href = '/users'
-          })
+          ).done( () => window.location.href = `/users`
+          ).fail( (err)=> $.handleErrors(err) )
         })
     })

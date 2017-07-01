@@ -6,14 +6,17 @@ form#user.mui-form
       = title
       
   .mui-textfield
-    input(type="text", name="username", value=user.username)
+    input(type="text", name="username", value=user.username required)
     label username
+    span#error-username.mui--text-danger.errorField
   .mui-textfield
-    input(type="text", name="email", value=user.email)
+    input(type="text", name="email", value=user.email required)
     label email
+    span#error-email.mui--text-danger.errorField
   .mui-textfield
-    input(type="password", name="password", value=user.password)
+    input(type="password", name="password", value=user.password required)
     label password
+    span#error-password.mui--text-danger.errorField
   input(type='hidden' name='id' value=user.id id='id')
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
     i.fa.fa-floppy-o 

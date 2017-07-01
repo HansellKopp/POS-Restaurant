@@ -27,7 +27,11 @@ router.post('/', function(req, res) {
   }).then(function(data) {
     res.status(200).json({'data': data})
   }).catch(function(err) {
-    res.status(500).json({'msg': err})
+    if(err.errors) {
+      res.status(500).json({'msg': err.errors})
+    } else {
+      res.status(500).json({'msg': err})
+    }
   })
 })
 
@@ -61,7 +65,7 @@ router.put('/:user_id', function(req, res) {
   ).then(function(data) {
     res.status(200).json({'data': data})
   }).catch(function(err){
-     res.status(500).json({'msg': err})
+    res.status(500).json({'msg': err.errors})
   })
 })
 module.exports = router

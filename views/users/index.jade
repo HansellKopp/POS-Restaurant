@@ -15,6 +15,7 @@ block content
         const data = JSON.parse(document.getElementById('payload').dataset.users)
         $("#tableHeader").append(makeHeader(['Username','Email','id']));
         $("#tableBody").append(makeBody(data, onLinkClick ));
+
     })
 
     // manage Edit and Delete actions 

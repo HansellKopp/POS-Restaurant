@@ -40,7 +40,25 @@ $.put = function(url, data, callback, type){
         contentType: type
     })
 }
-
+// Jquery ajax errors extension
+$.handleErrors = function(err) {
+    let message= ''
+    switch(err.status) {
+        case 500 :
+            let errors = JSON.parse(err.responseText)
+            message= 'Validation errors'
+            errors.msg.forEach(function(a) {
+                let fieldError = document.getElementById(`error-${a.path}`)
+                if(fieldError) {
+                fieldError.appendChild(document.createTextNode(a.message + ' '))
+                }
+            })
+            break
+        default:
+        message = err.statusText
+    }
+    swal("Error on saving!",`${err.status} ${message}`, "error")    
+}
 // Table header row
 //
 function makeHeader(item) {
