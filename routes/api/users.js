@@ -68,4 +68,5 @@ router.put('/:user_id', function(req, res) {
     res.status(500).json({'msg': err.errors})
   })
 })
+
 module.exports = router

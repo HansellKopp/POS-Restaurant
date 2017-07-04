@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
   h1= title
@@ -19,14 +19,9 @@ block content
       a(href="/categories/" + category.id + "/destroy") Destroy
       | )
       ul
-        li
-          | Create a new product:
-          form(action="/categories/" + category.id + "/product/create", method="post", style="display: inline")
-            input(type="number", name="number")
-            input(type="text", name="name")
-            input(type="text", name="description")
-            input(type="text", name="image_url")
-            input(type="submit")
+        li.mui--hide
+          include product
+          
         each product in category.Products
           li
             = product.number

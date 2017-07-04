@@ -62,5 +62,4 @@ router.delete('/:category_id/product/:product_id', function (req, res) {
   })
 })
 
-
 module.exports = router

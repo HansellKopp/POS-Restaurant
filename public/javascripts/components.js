@@ -59,24 +59,96 @@ $.handleErrors = function(err) {
     }
     swal("Error on saving!",`${err.status} ${message}`, "error")    
 }
+
+// Search Box
+// 
+function makeInputBox(placeholder, icon) {
+    var fragment = document.createDocumentFragment();
+    var div = document.createElement('div')
+    div.className = 'mui-textfield'
+    var input = document.createElement('input')
+    input.setAttribute('placeholder', placeholder)
+    input.setAttribute('id','searchBox')
+    input.className ='mui-textfield'
+    if (icon) {
+        var i = document.createElement('i')
+        i.className = `${icon} input-icon`
+        div.appendChild(i)
+    }
+    div.appendChild(input)
+    return div
+}
+// Layout components
+//
+// Container
+function makeContainer() {
+    var container = document.createElement('div')
+    container.className = 'mui-container-fluid'
+    return container
+}
+// Row
+function makeRow() {
+    var row = document.createElement('div')
+    row.className = 'mui-row'
+    return row
+}
+// Col
+function makeCol(cols) {
+    var col = document.createElement('div')
+    col.className = `mui-col-md-${cols}`
+    return col
+}
+
+// Table components
+//
+
+// Table capion
+//
+function makeCaption(title) {
+    var fragment = document.createDocumentFragment();
+    var container = makeContainer()
+    var row = makeRow()
+    var col = makeCol(12)
+    var h = document.createElement('h2')
+    var i = document.createElement('i')
+    i.className = 'fa fa-user-circle-o'
+    var span = document.createElement('span')
+    span.appendChild(document.createTextNode(title))
+    h.appendChild(i)
+    h.appendChild(span)
+    col.appendChild(h)
+    row.appendChild(col)
+    container.appendChild(row)
+    var row = makeRow()
+    col = new makeCol(10)
+    var inputBox = makeInputBox('search','fa fa-search')
+    col.appendChild(inputBox)
+    row.appendChild(col)
+    col = new makeCol(2)
+    col.appendChild(makeActionButton(
+                'fa-plus', 'mui--text-primary',
+                'add',
+                onAddClick
+            )
+    )
+    col.className = 'mui--pull-right'
+    row.appendChild(col)
+    container.appendChild(row)
+    fragment.append(container)
+    return fragment
+}
+
 // Table header row
 //
 function makeHeader(item) {
     var fragment = document.createDocumentFragment();
-    var row = document.createElement('tr')
+    row = document.createElement('tr')
     $.each(item, function(key, value) {
         var cell = document.createElement('th')
         if(value !== 'id') {
           cell.appendChild(document.createTextNode(value))
         } else {
-          var button = makeActionButton(
-            'fa-plus',
-            'mui--text-primary',
-            'add',
-            onAddClick
-          )
-          button.className += ' mui--pull-right'
-          cell.appendChild(button)
+          
         }
         row.appendChild(cell);
     })
@@ -121,6 +193,7 @@ function makeBody(data, onLinkClick) {
     })
     return fragment
 }
+
 // Action link
 function makeActionLink(href,icon, color, onClick) {
     var actionLink = document.createElement('a')
@@ -132,6 +205,7 @@ function makeActionLink(href,icon, color, onClick) {
     actionLink.appendChild(i)
     return actionLink
 }
+
 // Action button
 function makeActionButton(icon, color, caption, onClick) {
     var button = document.createElement('button')

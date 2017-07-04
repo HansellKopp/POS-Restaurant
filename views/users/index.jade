@@ -1,22 +1,32 @@
 extends ../layout
 
 block content
-  #payload(data-users=users)
+  #payload(data-users=users, data-title=title)
   table#table.mui-table.mui-table--bordered
-    caption.mui--text-left
-      h2
-        i.fa.fa-user-circle-o
-        span &nbsp; 
-        = title
+    caption#tableCaption.mui--text-left
     thead#tableHeader
     tbody#tableBody
   script.
     $(document).ready(function(){
         const data = JSON.parse(document.getElementById('payload').dataset.users)
-        $("#tableHeader").append(makeHeader(['Username','Email','id']));
-        $("#tableBody").append(makeBody(data, onLinkClick ));
-
+        const title = document.getElementById('payload').dataset.title
+        $('#tableCaption').append(makeCaption(title))
+        $('#tableHeader').append(makeHeader(['Username','Email','id']))
+        $('#tableBody').append(makeBody(data, onLinkClick ))
+        $('#searchBox').keyup(renderFilter)
     })
+
+    // Render filtered data
+    //
+    function renderFilter (event) {
+      const token = $( this ).val()
+      const data = JSON.parse(document.getElementById('payload').dataset.users)
+      var currentData = data.filter((s) => 
+        s.username.startsWith(token) || s.email.startsWith(token)
+      )
+      $('#tableBody').empty()
+      $('#tableBody').append(makeBody(currentData, onLinkClick ))
+    }
 
     // manage Edit and Delete actions 
     //

@@ -1,0 +1,27 @@
+form#product.mui-form
+  legend 
+  h2
+    i.fa.fa-user-circle-o
+    span &nbsp; 
+    Create Product
+  .mui-textfield
+    input(type="number", name="number", required)
+    label number
+    span#error-number.mui--text-danger.errorField
+  .mui-textfield
+    input(type="text", name="name", required)
+    label name
+    span#error-number.mui--text-danger.errorField
+  .mui-textfield
+    input(type="text", name="description", required)
+    label description
+  .mui-textfield
+    input(type="text", name="image_url", required)
+    label image
+  .mui-textfield
+    input(type="text", name="price", required)
+    label price
+  // input(type='hidden' name='id' value=user.id id='id')
+  button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+    i.fa.fa-floppy-o 
+    strong &nbsp; Save
