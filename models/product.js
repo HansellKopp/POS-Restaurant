@@ -2,7 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Product = sequelize.define("Product", {
-    description: DataTypes.STRING
+    number: DataTypes.INTEGER,
+    description: DataTypes.STRING,
+    image_url:  DataTypes.STRING,
+    price: DataTypes.DECIMAL
   });
   
   Product.associate = function(models) {

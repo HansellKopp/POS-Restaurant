@@ -20,7 +20,8 @@ node_modules/
 jspm_packages/
 
 # Database
-./db/*.sqlite
+./db/db.development.sqlite
+
 
 # Optional npm cache directory
 .npm

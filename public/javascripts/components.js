@@ -2,6 +2,13 @@
 // Author Hansell Kopp
 //
 
+// Generic functions
+//
+// Determine if a value is object
+function isObject(obj) {
+  return obj === Object(obj);
+}
+
 // Jquery Ajax extensions
 //
 // Ajax delete
@@ -50,7 +57,12 @@ $.handleErrors = function(err) {
             errors.msg.forEach(function(a) {
                 let fieldError = document.getElementById(`error-${a.path}`)
                 if(fieldError) {
-                fieldError.appendChild(document.createTextNode(a.message + ' '))
+                    // Clear old errors
+                    while (fieldError.firstChild) {
+                        fieldError.removeChild(fieldError.firstChild);
+                    }
+                    const fieldMessage = isObject(a.message) ? a.message : a.message
+                    fieldError.appendChild(document.createTextNode(fieldMessage + ' '))
                 }
             })
             break
@@ -104,14 +116,14 @@ function makeCol(cols) {
 
 // Table capion
 //
-function makeCaption(title) {
+function makeCaption(title, icon) {
     var fragment = document.createDocumentFragment();
     var container = makeContainer()
     var row = makeRow()
     var col = makeCol(12)
     var h = document.createElement('h2')
     var i = document.createElement('i')
-    i.className = 'fa fa-user-circle-o'
+    i.className = `fa ${icon}`
     var span = document.createElement('span')
     span.appendChild(document.createTextNode(title))
     h.appendChild(i)
@@ -158,37 +170,33 @@ function makeHeader(item) {
 
 // Table body rows
 //
-function makeBody(data, onLinkClick) {
+function makeBody(data, actions) {
     var fragment = document.createDocumentFragment()
     $.each(data, function(key, value) {
         var row = document.createElement('tr')
-        fragment.appendChild(row)
         $.each(value, function(childKey, childValue) {
-        var cell = document.createElement('td')
-        // fill data columns
-        if(childKey !== 'id') {
-            cell.appendChild(document.createTextNode(childValue))
-            row.appendChild(cell);
-        }
+            var cell = document.createElement('td')
+            if(childKey !== 'id') {
+                // fill data columns
+                cell.appendChild(document.createTextNode(childValue))
+                row.appendChild(cell);
+            } else {
+            // create actions buttons
+                var span = document.createElement('span')
+                span.className = 'mui--pull-right'
+                actions.forEach( (action) => {
+                    var link = makeActionLink(
+                        `${action.url}${value.id}`,
+                        action.icon,
+                        action.color,
+                        action.eventListener
+                    )
+                    span.appendChild(link)
+                })
+                cell.append(span)
+                row.appendChild(cell)
+            }
         })
-        // create actions buttons
-        var div = document.createElement('span')
-        div.className = 'mui--pull-right'
-        div.appendChild(makeActionLink(
-            "/users/delete/" + value.id,
-            'fa-times',
-            'mui--text-accent',
-            onLinkClick
-            ))
-        div.appendChild(makeActionLink(
-            "/users/edit/" + value.id,
-            'fa-pencil',
-            'mui--text-primary',
-            onLinkClick
-            ))
-        var cell = document.createElement('td')
-        cell.append(div)
-        row.appendChild(cell)
         fragment.append(row)
     })
     return fragment

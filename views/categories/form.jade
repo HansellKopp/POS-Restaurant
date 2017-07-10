@@ -1,0 +1,16 @@
+form#category.mui-form
+  legend 
+    h2
+      i.fa.fa-tag
+      span &nbsp; 
+      = title
+      
+  .mui-textfield
+    input(type="text", name="description", value=category.description required)
+    label description
+    span#error-description.mui--text-danger.errorField
+  input(type='hidden' name='id' value=category.id id='id')
+  button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+    i.fa.fa-floppy-o 
+    strong &nbsp; Save
+    

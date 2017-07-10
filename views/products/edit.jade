@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  #payload(data-product=data, data-title=title)
+  include ./form
+  script.
+    // define constants
+    //
+    const data = JSON.parse(document.getElementById('payload').dataset.product)
+
+    // start script
+    //
+    $(document).ready(function(){
+      var form = $('#product')
+      var id = $('#product_id').val()
+      form.submit(function( event ){
+        event.preventDefault()
+        $.put(
+          `/api/products/${id}`,
+          form.serialize()
+          ).done( () => window.location.href = `/categories/${data.CategoryId}/products`
+          ).fail( (err)=> $.handleErrors(err) )
+        })
+    })

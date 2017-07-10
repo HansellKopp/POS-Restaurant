@@ -8,7 +8,10 @@ var router  = express.Router()
 //
 router.get('/', function(req, res) {
   models.User.findAll({
-      attributes: ['username','email','id']
+    attributes: ['username','email','id'],
+    order: [
+      ['username','ASC']
+    ]
   })
     .then(function(users) {
         res.status(200).json({'users': users})
@@ -20,7 +23,7 @@ router.get('/', function(req, res) {
 
 // add new user
 router.post('/', function(req, res) {
-    models.User.create({
+  models.User.create({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password

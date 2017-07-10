@@ -3,19 +3,17 @@ extends ../layout
 block content
   include ./form
   script.
-    // define constants
-    //
-    const form = $('#user')
-    const id = $('#id').val()
-    // Start script
+    // start script
     //
     $(document).ready(function(){
+      var form = $('#category')
+      var id = $('#id').val()
       form.submit(function( event ){
         event.preventDefault()
         $.put(
-          `/api/users/${id}`,
+          `/api/categories/${id}`,
           form.serialize()
-          ).done( () => window.location.href = `/users`
+          ).done( () => window.location.href = `/categories`
           ).fail( (err)=> $.handleErrors(err) )
         })
     })

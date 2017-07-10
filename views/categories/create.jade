@@ -3,15 +3,15 @@ extends ../layout
 block content
   include ./form
   script.
-    // Start script
+    // start script
     //
     $(document).ready(function(){
-      $( "#user" ).submit( (event) => {
+      $( "#category" ).submit( (event) => {
         event.preventDefault()
         $.post(
-          "/api/users",
-          $( "#user" ).serialize()
-          ).done( () => window.location.href = `/users`
+          "/api/categories",
+          $( "#category" ).serialize()
+          ).done( () => window.location.href = `/categories`
           ).fail( (err)=> $.handleErrors(err) )
       })
     })

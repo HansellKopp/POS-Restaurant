@@ -4,14 +4,14 @@ var models  = require('../models')
 var express = require('express')
 var router  = express.Router()
 
-// update database schema
-models.sequelize.sync()
-
 // route users/ 
 //
 router.get('/', function(req, res) {
   models.User.findAll({
-    attributes: ['username','email','id']
+    attributes: ['username','email','id'],
+    order: [
+      ['username','ASC']
+    ]
   }).then(function(users) {
     res.render('./users/index', {
       title: 'Users list',

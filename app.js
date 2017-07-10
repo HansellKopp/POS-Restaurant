@@ -31,8 +31,22 @@ app.use('/users', users)
 app.use('/categories', categories)
 
 // api routes
+//
+
+// users
+//
 const usersApi = require('./routes/api/users')
 app.use('/api/users', usersApi)
+
+// categories
+//
+const categoriesApi = require('./routes/api/categories')
+app.use('/api/categories', categoriesApi)
+
+// products
+//
+const productsApi = require('./routes/api/products')
+app.use('/api/products', productsApi)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

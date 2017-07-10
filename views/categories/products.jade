@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  #payload(data-categories=categories, data-title=title)
+  #payload(data-data=data, data-title=title)
   table#table.mui-table.mui-table--bordered
     caption#tableCaption.mui--text-left
     thead#tableHeader
@@ -9,35 +9,31 @@ block content
   script.
     // define constants
     //
+    const data = JSON.parse(document.getElementById('payload').dataset.data)
     const title = document.getElementById('payload').dataset.title
-    const data = JSON.parse(document.getElementById('payload').dataset.categories)  
+    const sortProducts = data.Products.sort(
+          (a,b) => a.description > b.description
+        )
     const actions = [
       { 
-        url: '/categories/products/', 
-        icon:  'fa-th-list',
-        color: 'mui--text-primary',
-        eventListener: onLinkClick
-      },
-      { 
-        url: '/categories/delete/', 
+        url: '/products/delete/', 
         icon:  'fa-times',
         color: 'mui--text-accent',
         eventListener: onLinkClick
       },
       { 
-        url: '/categories/edit/', 
+        url: '/products/edit/', 
         icon:  'fa-pencil',
         color: 'mui--text-primary',
         eventListener: onLinkClick
-      }
+      }      
     ]
-
     // start script
     //
-    $(document).ready(function(){
-        $('#tableCaption').append(makeCaption(title, 'fa-tags'))
-        $('#tableHeader').append(makeHeader(['Description', 'id']))
-        $('#tableBody').append(makeBody(data, actions ))
+    $(document).ready(function() {
+        $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
+        $('#tableHeader').append(makeHeader(['Number','Decription', 'Image_url', 'Price', 'id']))
+        $('#tableBody').append(makeBody(sortProducts, actions ))
         $('#searchBox').keyup(renderFilter)
     })
 
@@ -45,14 +41,15 @@ block content
     //
     function renderFilter (event) {
       const token = $( this ).val().toUpperCase()
-      var currentData = data.filter((s) => 
-        s.description.toUpperCase().startsWith(token)
+      var currentData = sortProducts.filter((s) => 
+        s.description.toUpperCase().startsWith(token) ||
+        s.number.toString().startsWith(token)
       )
       $('#tableBody').empty()
       $('#tableBody').append(makeBody(currentData, actions ))
     }
 
-    // manage Details,Edit,Delete actions 
+    // manage Edit,Delete actions 
     //
     function onLinkClick( event ) {
       event.preventDefault()
@@ -61,18 +58,15 @@ block content
       var verb = urlArray[urlArray.length - 2]
       var id = urlArray[urlArray.length - 1]
       switch( verb ) {
-        case 'products':
-          window.location.href = `/categories/${id}/products/`
-          break
         case 'delete':
            $.delete(
-            `/api/categories/${id}`
-            ).done(function( data ) {
-            window.location.href = '/categories/'
+            `/api/products/${id}`
+            ).done(function() {
+            window.location.href = `/categories/${data.id}/products/`
           })
           break
         case 'edit':
-          window.location.href = `/categories/edit/${id}`
+          window.location.href = `/categories/${data.id}/products/edit/${id}`
           break
       }
     }
@@ -80,5 +74,7 @@ block content
     // manage add button
     //
     function onAddClick() {
-      window.location.href = '/categories/create'
+      if(data.id !== null) {
+        window.location.href = `/categories/${data.id}/products/create`
+      }
     }

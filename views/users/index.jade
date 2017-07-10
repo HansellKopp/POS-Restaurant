@@ -7,25 +7,42 @@ block content
     thead#tableHeader
     tbody#tableBody
   script.
+    // define constants
+    //
+    const data = JSON.parse(document.getElementById('payload').dataset.users)
+    const title = document.getElementById('payload').dataset.title
+    const actions = [ 
+      { 
+        url: '/users/delete/', 
+        icon:  'fa-times',
+        color: 'mui--text-accent',
+        eventListener: onLinkClick
+      },
+      { 
+        url: '/users/edit/', 
+        icon:  'fa-pencil',
+        color: 'mui--text-primary',
+        eventListener: onLinkClick
+      }
+    ]
+
+    // start script
     $(document).ready(function(){
-        const data = JSON.parse(document.getElementById('payload').dataset.users)
-        const title = document.getElementById('payload').dataset.title
-        $('#tableCaption').append(makeCaption(title))
+        $('#tableCaption').append(makeCaption(title, 'fa-user-circle-o'))
         $('#tableHeader').append(makeHeader(['Username','Email','id']))
-        $('#tableBody').append(makeBody(data, onLinkClick ))
+        $('#tableBody').append(makeBody(data, actions ))
         $('#searchBox').keyup(renderFilter)
     })
 
     // Render filtered data
     //
     function renderFilter (event) {
-      const token = $( this ).val()
-      const data = JSON.parse(document.getElementById('payload').dataset.users)
+      const token = $( this ).val().toUpperCase()
       var currentData = data.filter((s) => 
-        s.username.startsWith(token) || s.email.startsWith(token)
+        s.username.toUpperCase().startsWith(token) || s.email.toUpperCase().startsWith(token)
       )
       $('#tableBody').empty()
-      $('#tableBody').append(makeBody(currentData, onLinkClick ))
+      $('#tableBody').append(makeBody(currentData, actions ))
     }
 
     // manage Edit and Delete actions 
@@ -43,8 +60,10 @@ block content
             ).done(function( data ) {
             window.location.href = '/users/'
           })
+          break
         case 'edit':
           window.location.href = `/users/edit/${id}`
+          break
       }
     }
 
