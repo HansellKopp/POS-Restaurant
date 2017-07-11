@@ -7,7 +7,7 @@ var router  = express.Router()
 models.sequelize.sync()
 
 router.get('/', function(req, res) {
-    res.redirect('/users/')
+    res.redirect('/categories/')
     // res.render('index', {
     //  title: 'POS-Restaurants',
     // })

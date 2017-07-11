@@ -9,7 +9,6 @@ const express = require('express'),
 
 const app = express()
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
@@ -23,30 +22,22 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // frontend routes
+//
 const index = require('./routes/index'),
-      users = require('./routes/users'),
-      categories = require('./routes/categories')
+  users = require('./routes/users'),
+  categories = require('./routes/categories')
 app.use('/', index)
 app.use('/users', users)
 app.use('/categories', categories)
 
 // api routes
 //
-
-// users
-//
-const usersApi = require('./routes/api/users')
+const usersApi = require('./routes/api/users'),
+  productsApi = require('./routes/api/products'),
+  categoriesApi = require('./routes/api/categories')
 app.use('/api/users', usersApi)
-
-// categories
-//
-const categoriesApi = require('./routes/api/categories')
-app.use('/api/categories', categoriesApi)
-
-// products
-//
-const productsApi = require('./routes/api/products')
 app.use('/api/products', productsApi)
+app.use('/api/categories', categoriesApi)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
