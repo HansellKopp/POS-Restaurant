@@ -172,3 +172,25 @@ html,
      #sidedrawer strong + ul > li {
        padding: 6px 0px;
      }
+
+    .breadcrumb-container {
+       background-color: gainsboro;
+       margin: 0;
+    }
+
+    #breadcrumb {
+      margin: 0 0 0 30px;
+      padding: 0;
+    }
+    
+    #breadcrumb li:hover {
+      background-color: #E0E0E0;
+    }
+     #breadcrumb li {
+      display: inline;
+    }
+    #breadcrumb li+li:before {
+      content: '\f105';
+      font-family: 'fontAwesome';
+      padding: 0 10px;
+    }

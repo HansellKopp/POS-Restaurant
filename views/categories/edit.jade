@@ -8,6 +8,11 @@ block content
     $(document).ready(function(){
       var form = $('#category')
       var id = $('#id').val()
+      renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Categories', href: '/categories'},
+          { text: 'Edit', href: `/categories/edit/${id}`}
+      ])
       form.submit(function( event ){
         event.preventDefault()
         $.put(

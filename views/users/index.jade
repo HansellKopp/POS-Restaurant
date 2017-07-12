@@ -28,10 +28,15 @@ block content
 
     // start script
     $(document).ready(function(){
-        $('#tableCaption').append(makeCaption(title, 'fa-user-circle-o'))
+        renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Users', href: '/users'}
+        ])
+        $('#tableCaption').append(makeCaption(title, 'fa-user'))
         $('#tableHeader').append(makeHeader(['Username','Email','id']))
         $('#tableBody').append(makeBody(data, actions ))
         $('#searchBox').keyup(renderFilter)
+
     })
 
     // Render filtered data

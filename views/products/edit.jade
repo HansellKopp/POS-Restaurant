@@ -10,9 +10,16 @@ block content
 
     // start script
     //
+
     $(document).ready(function(){
       var form = $('#product')
       var id = $('#product_id').val()
+      renderBreadcrumb([
+        { text: 'Home', href: '/'},
+        { text: 'Categories', href: '/categories'},
+        { text: 'Products', href: `/categories/${data.CategoryId}/products`},
+        { text: 'Edit', href: `/categories/${data.CategoryId}/products/edit/${id}`}
+      ])
       form.submit(function( event ){
         event.preventDefault()
         $.put(

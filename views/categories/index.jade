@@ -35,10 +35,14 @@ block content
     // start script
     //
     $(document).ready(function(){
-        $('#tableCaption').append(makeCaption(title, 'fa-tags'))
-        $('#tableHeader').append(makeHeader(['Description', 'id']))
-        $('#tableBody').append(makeBody(data, actions ))
-        $('#searchBox').keyup(renderFilter)
+      renderBreadcrumb([
+        { text: 'Home', href: '/'},
+        { text: 'Categories', href: '/categories'}
+      ])
+      $('#tableCaption').append(makeCaption(title, 'fa-tags'))
+      $('#tableHeader').append(makeHeader(['Description', 'id']))
+      $('#tableBody').append(makeBody(data, actions ))
+      $('#searchBox').keyup(renderFilter)
     })
 
     // Render filtered data

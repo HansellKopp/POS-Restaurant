@@ -28,13 +28,19 @@ block content
         eventListener: onLinkClick
       }      
     ]
+    
     // start script
     //
     $(document).ready(function() {
-        $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
-        $('#tableHeader').append(makeHeader(['Number','Decription', 'Image_url', 'Price', 'id']))
-        $('#tableBody').append(makeBody(sortProducts, actions ))
-        $('#searchBox').keyup(renderFilter)
+      renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Categories', href: '/categories'},
+          { text: 'Products', href: `/categories/${data.id}/products/`}
+      ])
+      $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
+      $('#tableHeader').append(makeHeader(['Number','Decription', 'Image_url', 'Price', 'id']))
+      $('#tableBody').append(makeBody(sortProducts, actions ))
+      $('#searchBox').keyup(renderFilter)
     })
 
     // Render filtered data

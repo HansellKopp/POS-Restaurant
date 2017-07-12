@@ -72,10 +72,25 @@ $.handleErrors = function(err) {
     swal("Error on saving!",`${err.status} ${message}`, "error")    
 }
 
+// Breadcrumb
+//
+function renderBreadcrumb(options) {
+    const breadcrumb = $('#breadcrumb')
+    var fragment = document.createDocumentFragment();
+    $.each(options, function(key, value) {
+        var item = document.createElement('li')
+        var actionLink = document.createElement('a')
+        actionLink.href = value.href
+        actionLink.appendChild(document.createTextNode(value.text))
+        item.appendChild(actionLink)
+        fragment.append(item)
+    })
+    breadcrumb.empty()
+    breadcrumb.append(fragment)
+}
 // Search Box
 // 
 function makeInputBox(placeholder, icon) {
-    var fragment = document.createDocumentFragment();
     var div = document.createElement('div')
     div.className = 'mui-textfield'
     var input = document.createElement('input')

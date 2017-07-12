@@ -11,6 +11,12 @@ block content
     // start script
     //
     $(document).ready(function(){
+      renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Categories', href: '/categories'},
+          { text: 'Products', href: `/categories/${data.CategoryId}/products`},
+          { text: 'Create', href: `/categories/${data.CategoryId}/products/create`}
+      ])
       $( "#product" ).submit( (event) => {
         event.preventDefault()
         const dataset = $( "#product" ).serialize()
