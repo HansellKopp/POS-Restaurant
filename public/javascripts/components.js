@@ -71,6 +71,17 @@ $.handleErrors = function(err) {
     }
     swal("Error on saving!",`${err.status} ${message}`, "error")    
 }
+// Autocomplete render input options
+// 
+function renderOptions(element,data) {
+    var items = document.createDocumentFragment()
+    $.each(data.places, function(key, value) {
+        var option = document.createElement('option')
+        option.setAttribute('value', value.place)
+        items.append(option)
+    })
+    element.append(items)
+}
 
 // Breadcrumb
 //
@@ -140,7 +151,7 @@ function makeCaption(title, icon) {
     var i = document.createElement('i')
     i.className = `fa ${icon}`
     var span = document.createElement('span')
-    span.appendChild(document.createTextNode(title))
+    span.appendChild(document.createTextNode(` ${title}`))
     h.appendChild(i)
     h.appendChild(span)
     col.appendChild(h)

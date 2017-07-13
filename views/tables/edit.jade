@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  include ./form
+  script.
+    // define constants
+    //
+    const form = $('#table')
+    const id = $('#id').val()
+    const places = $('#places')
+    // Start script
+    //
+    $(document).ready(function(){
+      // render navigation breadcrumb
+      //
+      renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Tables', href: '/tables'},
+          { text: 'Edit', href: `/tables/edit/${id}`}
+      ])
+
+      // render places autocomplete options
+      //
+      $.get("/api/tables/places", (data) => {
+        renderOptions(places, data)
+      })
+
+      // handle submit post event
+      //
+      form.submit(function( event ){
+        event.preventDefault()
+        $.put(
+          `/api/tables/${id}`,
+          form.serialize()
+          ).done( () => window.location.href = `/tables`
+          ).fail( (err)=> $.handleErrors(err) )
+        })
+    })

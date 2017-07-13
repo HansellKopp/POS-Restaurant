@@ -23,19 +23,27 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // frontend routes
 //
-const index = require('./routes/index'),
+const 
+  index = require('./routes/index'),
   users = require('./routes/users'),
+  tables = require('./routes/tables'),
   categories = require('./routes/categories')
+
 app.use('/', index)
 app.use('/users', users)
+app.use('/tables', tables)
 app.use('/categories', categories)
 
 // api routes
 //
-const usersApi = require('./routes/api/users'),
+const 
+  usersApi = require('./routes/api/users'),
+  tablesApi = require('./routes/api/tables'),
   productsApi = require('./routes/api/products'),
   categoriesApi = require('./routes/api/categories')
+
 app.use('/api/users', usersApi)
+app.use('/api/tables', tablesApi)
 app.use('/api/products', productsApi)
 app.use('/api/categories', categoriesApi)
 

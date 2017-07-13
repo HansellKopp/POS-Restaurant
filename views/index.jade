@@ -12,16 +12,18 @@ block content
                     a(href='/categories') Categories and Products   
             .mui-col-md-6 
                 .mui-panel
-                    i.fa.fa-user.fa-3x &nbsp;   
-                    a(href='/Users') Users
+                    i.fa.fa-database.fa-3x &nbsp;   
+                    a(href='/tables') Tables
+        .mui-row
+            .mui-col-md-6
+                .mui-panel
+                    i.fa.fa-user.fa-3x &nbsp; 
+                    a(href='/users') Users   
     script.
         // start script
         //
         $(document).ready(function(){
-        renderBreadcrumb([
-            { 
-            text: 'Home',
-            href: '/'
-            }
-        ])
+            renderBreadcrumb([
+                { text: 'Home', href: '/'}
+            ])
         })

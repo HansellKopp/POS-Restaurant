@@ -1,0 +1,24 @@
+form#table.mui-form
+  legend 
+    h2
+      i.fa.fa-table-circle-o
+      span &nbsp; 
+      = title
+      
+  .mui-textfield
+    input(list="places", name="place", value=table.place required, autocomplete="off")
+    datalist#places
+    label Place
+    span#error-place.mui--text-danger.errorField
+  .mui-textfield
+    input(type="text", name="number", value=table.number required)
+    label Table number
+    span#error-number.mui--text-danger.errorField
+  .mui-textfield
+    input(type="number", name="seats", value=table.seats )
+    label Seats
+    span#error-password.mui--text-danger.errorField
+  input(type='hidden' name='id' value=table.id id='id')
+  button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+    i.fa.fa-floppy-o 
+    strong &nbsp; Save

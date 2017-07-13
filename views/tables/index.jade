@@ -1,0 +1,79 @@
+extends ../layout
+
+block content
+  #payload(data-tables=tables, data-title=title)
+  table#table.mui-table.mui-table--bordered
+    caption#tableCaption.mui--text-left
+    thead#tableHeader
+    tbody#tableBody
+  script.
+    // define constants
+    //
+    const data = JSON.parse(document.getElementById('payload').dataset.tables)
+    const title = document.getElementById('payload').dataset.title
+    const actions = [ 
+      { 
+        url: '/tables/delete/', 
+        icon:  'fa-times',
+        color: 'mui--text-accent',
+        eventListener: onLinkClick
+      },
+      { 
+        url: '/tables/edit/', 
+        icon:  'fa-pencil',
+        color: 'mui--text-primary',
+        eventListener: onLinkClick
+      }
+    ]
+
+    // start script
+    $(document).ready(function(){
+        renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Tables', href: '/tables'}
+        ])
+        $('#tableCaption').append(makeCaption(title, 'fa-database'))
+        $('#tableHeader').append(makeHeader(['Place','Number','Seats','id']))
+        $('#tableBody').append(makeBody(data, actions ))
+        $('#searchBox').keyup(renderFilter)
+
+    })
+
+    // Render filtered data
+    //
+    function renderFilter (event) {
+      const token = $( this ).val().toUpperCase()
+      var currentData = data.filter((s) => 
+        s.place.toUpperCase().startsWith(token) || s.number.toUpperCase().startsWith(token)
+      )
+      $('#tableBody').empty()
+      $('#tableBody').append(makeBody(currentData, actions ))
+    }
+
+    // manage Edit and Delete actions 
+    //
+    function onLinkClick( event ) {
+      event.preventDefault()
+      var element = event.srcElement.nodeName === 'I'? event.srcElement.parentNode : event.srcElement
+      var urlArray = element.href.split('/')
+      var verb = urlArray[urlArray.length - 2]
+      var id = urlArray[urlArray.length - 1]
+      switch( verb ) {
+        case 'delete':
+           $.delete(
+            `/api/tables/${id}`
+            ).done(function( data ) {
+            window.location.href = '/tables/'
+          })
+          break
+        case 'edit':
+          window.location.href = `/tables/edit/${id}`
+          break
+      }
+    }
+
+    // manage add button
+    //
+    function onAddClick() {
+      window.location.href = '/tables/create'
+    }

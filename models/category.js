@@ -2,7 +2,13 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Category = sequelize.define('Category', {
-    description: DataTypes.STRING
+    description: {
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+          notEmpty: true
+      }
+    }
   })
 
   Category.associate = function(models) {
