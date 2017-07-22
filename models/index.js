@@ -8,12 +8,12 @@ const db = {};
 
 if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    dialectOptions: {
-        ssl: true
-      }
-  })
+                                    dialect: 'postgres',
+                                    protocol: 'postgres',
+                                    dialectOptions: {
+                                        ssl: true
+                                    }
+                                })
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
