@@ -6,17 +6,14 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env];
 const db = {};
 
-if (process.env.DATABASE_URL) {
-  var sequelize = new Sequelize(process.env.DATABASE_URL, {
+var sequelize = new Sequelize(process.env.DATABASE_URL, { 
                                     dialect: 'postgres',
                                     protocol: 'postgres',
                                     dialectOptions: {
                                         ssl: true
                                     }
-                                })
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+                                });
+
 
 sequelize.authenticate()
   .then(function () {
