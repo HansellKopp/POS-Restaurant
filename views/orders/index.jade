@@ -1,0 +1,85 @@
+extends ../layout
+
+block content
+  #payload(data-orders=orders, data-title=title)
+  table#grid
+  script.
+    // define constants
+    //
+    const grid =  document.getElementById('grid')
+    const data = JSON.parse(document.getElementById('payload').dataset.orders)
+    const title = document.getElementById('payload').dataset.title
+    const actions = [ 
+      { 
+        url: '/orders/delete/', 
+        icon:  'fa-times',
+        color: 'mui--text-accent',
+        eventListener: onLinkClick
+      },
+      { 
+        url: '/orders/edit/', 
+        icon:  'fa-pencil',
+        color: 'mui--text-primary',
+        eventListener: onLinkClick
+      }
+    ]
+
+    function renderPanel(data){
+      var panel = document.createElement('div')
+      div.addClass('mui-panel')
+      var title = document.createElement('h2')
+      title.createTextNode('data.number')
+      var subtitle = document.createElement('p')
+      subtitle.createTextNode('data.amount')
+      panel.append(title)
+      return panel
+    }
+    // start script
+    $(document).ready(function(){
+        renderBreadcrumb([
+          { text: 'Home', href: '/'},
+          { text: 'Orders', href: '/orders'}
+        ])
+        // 
+        //
+        
+        // renderOrders()
+    })
+
+    // Render Orders
+    //
+    function renderOrders ( value ) {
+      const token = $( this ).val().toUpperCase()
+      var currentData = data.filter((s) => 
+        s.username.toUpperCase().startsWith(token) || s.email.toUpperCase().startsWith(token)
+      )
+      $('#grid').empty()
+    }
+
+    // manage Edit and Delete actions 
+    //
+    function onLinkClick( event ) {
+      event.preventDefault()
+      var element = event.srcElement.nodeName === 'I'? event.srcElement.parentNode : event.srcElement
+      var urlArray = element.href.split('/')
+      var verb = urlArray[urlArray.length - 2]
+      var id = urlArray[urlArray.length - 1]
+      switch( verb ) {
+        case 'delete':
+           $.delete(
+            `/api/orders/${id}`
+            ).done(function( data ) {
+            window.location.href = '/orders/'
+          })
+          break
+        case 'edit':
+          window.location.href = `/orders/edit/${id}`
+          break
+      }
+    }
+
+    // manage add button
+    //
+    function onAddClick() {
+      window.location.href = '/orders/create'
+    }

@@ -11,7 +11,10 @@ router.get('/', function(req, res) {
       attributes: ['description'],
       order: [
         ['description', 'ASC']
-      ]
+      ],
+      include: [{ 
+        model: models.Product
+      }]
   })
     .then(function(categories) {
         res.status(200).json({'categories': categories})

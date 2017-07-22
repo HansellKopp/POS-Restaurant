@@ -20,8 +20,6 @@ module.exports = function(sequelize, DataTypes) {
   });
   
   Product.associate = function(models) {
-    // Using additional options like CASCADE etc for demonstration
-    // Can also simply do Product.belongsTo(models.User);
     Product.belongsTo(models.Category, {
       onDelete: "CASCADE",
       foreignKey: {
