@@ -7,6 +7,7 @@ var router  = express.Router()
 // retrieve all categories
 //
 router.get('/', function(req, res) {
+  console.log(models)
   models.Category.findAll({
       attributes: ['description'],
       order: [
