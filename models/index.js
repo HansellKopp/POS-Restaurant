@@ -6,20 +6,19 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env];
 const db = {};
 
-let sequelize;
-
 if (process.env.DATABASE_URL) {
-    // the application is executed on Heroku ... use the postgres database
-    sequelize = new Sequelize(process.env.DATABASE_URL, {
-      dialect:  'postgres',
-      protocol: 'postgres',
-      logging:  true //false
-    })
+  var sequelize = new Sequelize(process.env.DATABASE_URL,config);
 } else {
-  sequelize = new Sequelize(
-    config.database, config.username, config.password, config
-  );
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+sequelize.authenticate()
+  .then(function () {
+    console.log('Connection successful');
+  })
+  .catch(function(error) {
+    console.log("Error creating connection:", error);
+  });
 
 fs
   .readdirSync(__dirname)
