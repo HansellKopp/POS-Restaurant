@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 const 
   index = require('./routes/index'),
   users = require('./routes/users'),
+  orders = require('./routes/orders'),
   tables = require('./routes/tables'),
   categories = require('./routes/categories')
 
@@ -33,17 +34,20 @@ app.use('/', index)
 app.use('/users', users)
 app.use('/tables', tables)
 app.use('/categories', categories)
+app.use('/Orders', orders)
 
 // api routes
 //
 const 
   usersApi = require('./routes/api/users'),
   tablesApi = require('./routes/api/tables'),
+  ordersApi = require('./routes/api/orders'),
   productsApi = require('./routes/api/products'),
   categoriesApi = require('./routes/api/categories')
 
 app.use('/api/users', usersApi)
 app.use('/api/tables', tablesApi)
+app.use('/api/orders', ordersApi)
 app.use('/api/products', productsApi)
 app.use('/api/categories', categoriesApi)
 
