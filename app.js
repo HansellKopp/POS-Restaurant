@@ -58,10 +58,6 @@ app.use(function(req, res, next) {
   next(err)
 })
 
-// Initialize sequelize and drop the database before reconstructing it (the force: true)
-models.sequelize.sync({force: true}).then(function() {
-    console.log('Database Initialized');
-});
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
