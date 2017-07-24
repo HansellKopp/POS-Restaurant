@@ -25,7 +25,10 @@ router.get('/', function(req, res) {
 router.get('/create', (req, res) => {
     res.render('./categories/create', {
       title: 'Create category',
-      category: ['description'],
+      data: {
+        'id' : null,
+        'description': ''
+      },
       errors: ''
     })
 })
@@ -36,10 +39,10 @@ router.get('/edit/:category_id', (req, res) => {
     var id =  req.params.category_id
     models.Category.findById(
       id
-    ).then(function(category) {
+    ).then(function(data) {
       res.render('./categories/edit', {
         title: 'Edit category',
-        category: category,
+        data,
         errors: ''
       })
     })
