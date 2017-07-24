@@ -1,15 +1,11 @@
 {
-  "development_old": {
+  "development_sqlite": {
     "dialect": "sqlite",
     "storage": "./db/db.development.sqlite"
   },
   "development": {
     "use_env_variable": "DATABASE_URL",
-    "dialect": "postgres",
-    "logging": false,
-    "dialectOptions": {
-      "ssl": true
-    }
+    "dialect": "postgres"
   },
   "test": {
     "dialect": "sqlite",
