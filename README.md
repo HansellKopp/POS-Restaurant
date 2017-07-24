@@ -29,10 +29,10 @@
     * docker service rm <service_name>
 
 ## Database administration
-    * using Adminer
-      * admin database http://localhost:8080/
-        * user: postgress
-        * pass: admin
+  * using Adminer
+    * admin database http://localhost:8080/
+      * user: postgress
+      * pass: admin
 ## Docker images and containers
   * Delete all containers
     * sudo docker rm $(sudo docker ps -a -q)
