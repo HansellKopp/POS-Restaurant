@@ -71,7 +71,7 @@ router.get('/:category_id/products', (req, res) => {
       })
     } else {
       res.render('./categories/products', {
-      title: ` Category: ${data.description}`,
+      title: ` Category: ${data.description} > products`,
       data: data
     })
     }
