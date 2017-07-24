@@ -59,7 +59,8 @@ block content
     //
     function onLinkClick( event ) {
       event.preventDefault()
-      var element = event.srcElement.nodeName === 'I'? event.srcElement.parentNode : event.srcElement
+      var target = event.target || event.srcElement
+      var element = target.nodeName === 'I'? target.parentNode : target
       var urlArray = element.href.split('/')
       var verb = urlArray[urlArray.length - 2]
       var id = urlArray[urlArray.length - 1]
