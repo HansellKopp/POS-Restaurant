@@ -11,9 +11,9 @@ var models  = require('../models')
 
 // Initialize sequelize and drop the database before reconstructing it (the force: true)
 models.sequelize.sync({force: true}).then(function() {
-    console.log('Database Initialized');
+    console.log('Database Initialized')
 })
-  
+
 /**
  * Get port from environment and store in Express.
  */

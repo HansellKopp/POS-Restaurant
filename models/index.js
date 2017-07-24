@@ -1,39 +1,41 @@
-'use strict';
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(`${__dirname}/../config/config.json`)[env];
+const db = {};
 
-var fs        = require('fs');
-var path      = require('path');
-var Sequelize = require('sequelize');
-var basename  = path.basename(module.filename);
-var db        = {};
+let sequelize;
+console.log(process.env[config.use_env_variable])
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable],
+  {
+    "dialect": "postgres"
+  })
+} else {
+  sequelize = new Sequelize(
+    config.database, config.username, config.password, config
+  );
+}
 
-// Initialize sequelize with heroku postgres - the actuall address comes from the DATABASE_URL environment variable
-var sequelize = new Sequelize(process.env.DATABASE_URL, { 
-                                    dialect: 'postgres',
-                                    protocol: 'postgres',
-                                    dialectOptions: {
-                                        ssl: true
-                                    }
-                                });
-
-// Read through this folder and join the contents (the models) into the db object
 fs
   .readdirSync(__dirname)
-  .filter(function(file) {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(function(file) {
-    var model = sequelize['import'](path.join(__dirname, file));
+  .filter(file =>
+    (file.indexOf('.') !== 0) &&
+    (file !== basename) &&
+    (file.slice(-3) === '.js'))
+  .forEach(file => {
+    const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });
 
-// Execute the 'associate' method from each model if it exists
-Object.keys(db).forEach(function(modelName) {
+Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 });
 
-// aliases
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
