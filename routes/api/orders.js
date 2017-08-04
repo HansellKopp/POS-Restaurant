@@ -23,16 +23,27 @@ router.get('/', function(req, res) {
 // add new Order with details
 //
 router.post('/', function(req, res) {
-  models.Order.create({
+  models.Order.findOrCreate({
+      where: {number: req.body.table}, 
+    defaults: {number: req.body.table}
+  }).then((s) => {
+      const newId = s[0].dataValues.id
+      models.OrderDetail.create({
+        OrderId: newId,
         number: req.body.number,
-  }).then(function(data) {
-    res.status(200).json({'data': data})
-  }).catch(function(err) {
-    if(err.errors) {
-      res.status(500).json({'msg': err.errors})
-    } else {
-      res.status(500).json({'msg': err})
-    }
+        quantity: req.body.quantity,
+        product: req.body.product,
+        description: req.body.description,
+        price: req.body.price,
+      }).then(function(data) {
+        res.status(200).json({'data': data})
+      }).catch(function(err) {
+      if(err.errors) {
+        res.status(500).json({'msg': err.errors})
+      } else {
+        res.status(500).json({'msg': err})
+      }
+      })
   })
 })
 
@@ -49,6 +60,18 @@ router.delete('/:order_id', function(req, res) {
   })
 })
 
+// remove order by id
+router.delete('/detail/:id', function(req, res) {
+  models.OrderDetail.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(data) {
+    res.status(200).json({'data': data})
+  }).catch(function(err){
+     res.status(500).json({'msg': err})
+  })
+})
 // update order by id
 router.put('/:order_id', function(req, res) {
   models.Order.update(

@@ -22,6 +22,23 @@ router.get('/', function(req, res) {
     })
 })
 
+// retrieve product by id
+//
+router.get('/number/:product_number', function(req, res) {
+  models.Product.findAll({
+    attributes: ['number','description','price','id'],
+    where: {
+      number: req.params.product_number
+    }
+  })
+    .then(function(products) {
+        res.status(200).json({'product': products[0]})
+    })
+    .catch(function(err){
+        res.status(500).json({'msg': err})
+    })
+})
+
 // remove product by id
 router.delete('/:product_id', function(req, res) {
   models.Product.destroy({

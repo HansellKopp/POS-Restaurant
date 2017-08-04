@@ -8,6 +8,19 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
           notEmpty: true
       }
+    },
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'open'
+    },
+    printed: DataTypes.DATE,
+    tax: {
+      type: DataTypes.DECIMAL,
+      defaultValue: 0
+    },
+    serviceTax: {
+      type: DataTypes.DECIMAL,
+      defaultValue: 0
     }
   })
 

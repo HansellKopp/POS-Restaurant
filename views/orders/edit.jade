@@ -1,0 +1,173 @@
+extends ../layout
+
+block content
+  #payload(data-order=order data-title=title)
+  include ./form
+  table#table.mui-table.mui-table--bordered
+    thead#tableHeader
+    tbody#tableBody
+  script.
+    // define variables
+    //
+    let order =  JSON.parse(document.getElementById('payload').dataset.order)
+    let table = order.table
+    let orderData = []
+    let data = clearData()
+    const actions = [{ 
+        url: '/orders/detail/delete/', 
+        icon:  'fa-times',
+        color: 'mui--text-accent',
+        eventListener: onLinkClick
+      }]
+    // start script
+    //
+    $(document).ready(function(){
+      renderBreadcrumb([
+        { text: 'Home', href: '/'},
+        { text: 'Orders', href: '/orders'},
+        { text: 'Edit', href: '/orders/edit'}
+      ])
+      data=clearData()
+      $('#tableHeader').append(makeHeader(
+        ['Cuantity', 'Product', 'Description', 'Price', 'Total', 'id']
+      ))
+      $( "#order" ).submit( (event) => {
+        event.preventDefault()
+        data.table = table
+        $.post(
+          "/api/orders",
+          data
+          ).done((s) => {
+            orderData = [...orderData, {
+              quantity: s.data.quantity,
+              number: s.data.number,
+              description: s.data.description,
+              price: s.data.price,
+              total: s.data.quantity * s.data.price,
+              id: s.data.id
+            }]
+            data=clearData()
+            $('#tableBody').empty()
+            $('#tableBody').append(makeBody(orderData, actions ))
+          } 
+        ).fail( (err)=> $.handleErrors(err) )
+      })
+    })
+
+    // clearData
+    // 
+    function clearData() {
+      var clean =  {
+        table: order.table ? order.table : '',
+        quantity: 1,
+        number: null,
+        description: null,
+        price: 0,
+        total: 0
+      }
+      $('#number').text(`TABLE: ${clean.table}`)
+      $('#quantity').text(`QUANTITY: ${clean.quantity}`)
+      $('#total').text(`TOTAL: ${clean.total}`)
+      $('#price').text(`PRICE: ${clean.price}`)
+      $('#product').text(`PRODUCT: `)
+      $('#description').text(`DESCRIPTION: `)
+      return clean
+    }
+    // Table selection modal window
+    //
+    function activateModalTable() {
+      $.get("/api/tables").done( 
+          (data) => {
+            modal = createModal(
+              'modalTable','Tables', 
+              data.tables.map((s) => s.number),
+              selectTable              
+            )
+          }
+        ).fail( (err)=> $.handleErrors(err) )
+    }
+
+    // Table selection event handler
+    //
+    function selectTable(item) {
+      $('#number').text(`TABLE: ${item}`)
+      table = item
+      mui.overlay('off', document.getElementById('modalTable'))
+    }
+
+    // Quantity selection modal window
+    //
+    function activateModalQuantity() {
+      modal = createModal(
+        'modalQuantity','Quantity', 
+        [1,2,3,4,5,6,7,8,9],
+        selectQuantity
+      )
+    }
+
+    // Quantity selection event handler
+    //
+    function selectQuantity(item) {
+      data.quantity = item
+      data.total = data.quantity * data.price
+      $('#quantity').text(`QUANTITY: ${data.quantity}`)
+      $('#total').text(`TOTAL: ${data.total}`)
+      mui.overlay('off', document.getElementById('modalQuantity'))
+    }
+
+    // Table selection modal window
+    //
+    function activateModalProduct() {
+      $.get("/api/products").done( 
+          (data) => {
+            modal = createModal(
+              'modalProduct','Product', 
+              data.products.map((s) => ({
+                number: s.number,
+                description: s.description
+              })
+              ),
+              selectProduct              
+            )
+          }
+        ).fail( (err)=> $.handleErrors(err) )
+    }
+
+    // Quantity selection event handler
+    //
+    function selectProduct(item) {
+      $.get(`/api/products/number/${item.number}`).done( 
+        (s) => {
+          data.price = s.product.price
+          data.number = s.product.number
+          data.description = s.product.description
+          data.total = s.product.price * data.quantity
+          data.id = s.product.id
+          $('#total').text(`TOTAL: ${data.total}`)
+          $('#price').text(`PRICE: ${data.price}`)
+          $('#product').text(`PRODUCT: ${data.number}`)
+          $('#description').text(`DESCRIPTION: ${data.description}`)
+        }
+      ).fail( (err)=> $.handleErrors(err) )
+      mui.overlay('off', document.getElementById('modalProduct'))
+    }
+
+    // manage Details,Edit,Delete actions 
+    //
+    function onLinkClick( event ) {
+      event.preventDefault()
+      var target = event.target || event.srcElement
+      var element = target.nodeName === 'I'? target.parentNode : target
+      var urlArray = element.href.split('/')
+      var verb = urlArray[urlArray.length - 2]
+      var id = urlArray[urlArray.length - 1]
+      switch( verb ) {
+        case 'delete':
+           $.delete(
+            `/api/orders/detail/${id}`
+            ).done(function( data ) {
+            window.location.href = '/orders/'
+          })
+          break
+      }
+    }

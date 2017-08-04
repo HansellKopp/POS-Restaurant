@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     tags: DataTypes.STRING,
     quantity: DataTypes.DOUBLE,
     price: DataTypes.DECIMAL,
+    userId: DataTypes.INTEGER,
   })
   
   OrderDetail.associate = function(models) {
@@ -17,6 +18,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
   }
-  
+
   return OrderDetail;
 };

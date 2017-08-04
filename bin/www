@@ -9,7 +9,7 @@ var debug = require('debug')('pos-backend:server')
 var http = require('http')
 var models  = require('../models')
 
-// Initialize sequelize and drop the database before reconstructing it (the force: true)
+// Initialize sequelize and drop the database before reconstructing it the (force: true)
 models.sequelize.sync().then(function() {
     console.log('Database Initialized')
 })

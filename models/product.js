@@ -10,12 +10,12 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     description: {
-      type:  DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
          notEmpty: true
       }
     },
-    image_url:  DataTypes.STRING,
+    image_url: DataTypes.STRING,
     price: DataTypes.DECIMAL
   });
   

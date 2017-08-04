@@ -11,4 +11,12 @@ router.get('/', function(req, res) {
     })
 })
 
+router.get('/init-database', (req, res) => {
+    // Initialize sequelize and drop the database before reconstructing it the (force: true)
+    models.sequelize.sync({force:true}).then(function() {
+        console.log('Database Initialized')
+    })
+    res.redirect('/')
+})
+
 module.exports = router

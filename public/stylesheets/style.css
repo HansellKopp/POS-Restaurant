@@ -194,3 +194,13 @@ html,
       font-family: 'fontAwesome';
       padding: 0 10px;
     }
+
+    /**
+     * Modal overlays
+     */
+     .modal {
+        width: '90%';
+        height: 'auto';
+        margin: '100px auto';
+        background-color: '#fff';
+     }

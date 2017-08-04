@@ -24,10 +24,17 @@ router.get('/', function(req, res) {
 
 // route orders/create
 //
-router.get('/create', (req, res) => {
-    res.render('./orders/create', {
-      title: 'Create order',
-      order: ['description'],
+router.get('/edit/:table?', (req, res) => {
+    res.render('./orders/edit', {
+      title: 'Edit order',
+      order: { 
+        table: req.params.table,
+        quantity: 1,
+        product: null,
+        description: null,
+        price: 0,
+        total: 0
+      },
       errors: ''
     })
 })

@@ -47,6 +47,7 @@ $.put = function(url, data, callback, type){
         contentType: type
     })
 }
+
 // Jquery ajax errors extension
 $.handleErrors = function(err) {
     let message= ''
@@ -71,6 +72,7 @@ $.handleErrors = function(err) {
     }
     swal("Error on saving!",`${err.status} ${message}`, "error")    
 }
+
 // Autocomplete render input options
 // 
 function renderOptions(element,data) {
@@ -99,6 +101,7 @@ function renderBreadcrumb(options) {
     breadcrumb.empty()
     breadcrumb.append(fragment)
 }
+
 // Search Box
 // 
 function makeInputBox(placeholder, icon) {
@@ -108,6 +111,7 @@ function makeInputBox(placeholder, icon) {
     input.setAttribute('placeholder', placeholder)
     input.setAttribute('id','searchBox')
     input.className ='mui-textfield'
+    input.setAttribute('autofocus', true)
     if (icon) {
         var i = document.createElement('i')
         i.className = `${icon} input-icon`
@@ -116,6 +120,7 @@ function makeInputBox(placeholder, icon) {
     div.appendChild(input)
     return div
 }
+
 // Layout components
 //
 // Container
@@ -124,12 +129,14 @@ function makeContainer() {
     container.className = 'mui-container-fluid'
     return container
 }
+
 // Row
 function makeRow() {
     var row = document.createElement('div')
     row.className = 'mui-row'
     return row
 }
+
 // Col
 function makeCol(cols) {
     var col = document.createElement('div')
@@ -205,11 +212,13 @@ function makeBody(data, actions) {
             if(childKey !== 'id') {
                 // fill data columns
                 cell.appendChild(document.createTextNode(childValue))
+                cell.className = isNaN(childValue) ? '' : 'mui--text-right'
                 row.appendChild(cell);
             } else {
             // create actions buttons
                 var span = document.createElement('span')
                 span.className = 'mui--pull-right'
+                console.log(actions, value)
                 actions.forEach( (action) => {
                     var link = makeActionLink(
                         `${action.url}${value.id}`,
@@ -251,5 +260,77 @@ function makeActionButton(icon, color, caption, onClick) {
     button.appendChild(i)
     button.appendChild(span)
     button.addEventListener("click", onClick);
+    return button
+}
+
+function createTabs(data) {
+    var div = document.createElement('div')
+    var tabs = document.createElement('ul')
+    tabs.className = 'mui-tabs__bar mui-tabs__bar--justified'
+    data.map((s) => {
+        var item = document.createElement('li')
+        var a = document.createElement('a')
+        a.dataset.dataMuiToggle = 'tab'
+        a.dataset.dataMuiControls = `tab${s}`
+        a.appendChild(document.createTextNode(s))
+        item.appendChild(a)
+        tabs.appendChild(item)
+    })
+    div.appendChild(tabs)
+    return div
+}
+
+// Create modal overlay for selections
+//
+function createModal(modalId, caption, data, eventListener) {
+    var modal = document.createElement('div')
+    modal.id = modalId
+    modal.style.width = '90%'
+    modal.style.height = 'auto'
+    modal.style.margin = '100px auto'
+    modal.style.backgroundColor = '#fff'
+    var container = document.createElement('div')
+    container.className = 'mui-container-fluid'
+    var title = document.createElement('h2')
+    title.append(document.createTextNode(caption))
+    title.className = 'mui--text-left'
+    var divider = document.createElement('div')
+    divider.className = 'mui-divider'
+    // var tabs = createTabs(groups)
+    // container.append(tabs)
+    container.append(title)
+    container.append(divider)
+    modal.append(container)
+    var row = document.createElement('div')
+    row.className = 'mui-row'
+    row.style.marginLeft = '2px'
+    data.map((s) => {
+        row.append(renderElement(s, eventListener))
+    })
+    container.append(row)
+    mui.overlay('on',modal)
+    return modal
+}
+// Render modal window selection element
+//
+function renderElement(item, eventListener){
+    var button = document.createElement('button')
+    button.className += 'mui-col-md-2 mui-btn--primary mui-btn--raised'
+    button.style.margin = '10px'
+    button.style.padding = '10px'
+    button.style.textAlign = 'center'
+    button.style.border = 'none'
+    button.style.borderRadius= '2px'
+    if(isObject(item)) {
+        for(var x in item) {
+            var p = document.createElement('p')
+            p.appendChild(document.createTextNode(item[x]))
+            button.appendChild(p)
+        }
+    } else {
+        button.append(document.createTextNode(item))
+    }
+    
+    button.addEventListener('click',() => eventListener(item))
     return button
 }

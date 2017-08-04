@@ -7,7 +7,7 @@ form#product.mui-form
   input(type='hidden' name='product_id' value=data.id id='product_id')
   input(type='hidden' name='category_id' value=data.CategoryId id='category_id')
   .mui-textfield
-    input(type="number", name="number", value=data.number, required)
+    input(type="number", name="number", value=data.number, required autofocus)
     label number
     span#error-number.mui--text-danger.errorField
   .mui-textfield

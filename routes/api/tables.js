@@ -16,7 +16,6 @@ router.get('/', function(req, res) {
       ]
   })
     .then(function(tables) {
-        console.log(tables)
         res.status(200).json({'tables': tables})
     })
     .catch(function(err){
@@ -39,13 +38,31 @@ router.get('/places', function(req, res) {
         res.status(200).json({'places': data})
     })
     .catch(function(err){
-        console.log(err)
         res.status(500).json({'msg': err})
     })
 })
+
+// retrieve all places
+//
+router.get('/numbers', function(req, res) {
+  models.Table.findAll({
+      attributes: [
+        [ Sequelize.fn('DISTINCT', Sequelize.col('number')) ,'number']
+      ],
+      order: [
+        ['number', 'ASC']
+      ]
+  })
+    .then(function(data) {
+        res.status(200).json({data})
+    })
+    .catch(function(err){
+        res.status(500).json({'msg': err})
+    })
+})
+
 // add new table
 router.post('/', function(req, res) {
-    console.log(req.body)
     models.Table.create({
         number: req.body.number,
         place: req.body.place,

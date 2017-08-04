@@ -6,7 +6,7 @@ form#category.mui-form
       = title
       
   .mui-textfield
-    input(type="text", name="description", value=data.description required)
+    input(type="text", name="description", value=data.description required autofocus)
     label description
     span#error-description.mui--text-danger.errorField
   input(type='hidden' name='id' value=data.id id='id')

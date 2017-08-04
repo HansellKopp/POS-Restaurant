@@ -1,0 +1,41 @@
+form#order.mui-form.mui-form--inline
+  legend 
+    h2
+      i.fa.fa-edit
+      span &nbsp; 
+      = title
+      
+  .mui-row
+    .mui-textfield
+      button(
+        id="number"
+        type="button",
+        onclick="activateModalTable()",
+        value = order.table
+        ).mui-btn Table
+  .mui-row
+    .mui-textfield
+      button(
+        id="quantity",
+        type="button",
+        onclick="activateModalQuantity()",
+        value = order.quantity
+        ).mui-btn quantity
+    .mui-textfield
+      button(
+        id="product",
+        type="button",
+        onclick="activateModalProduct()",
+        value = order.product
+        ).mui-btn Product
+    .mui-textfield
+      button(type="text" id='description' readonly).mui-btn Description
+    .mui-textfield
+      button(type="text", id="price" readonly).mui-btn Price
+    .mui-textfield
+      button(type="text", id="total" readonly).mui-btn Total
+    input(type='hidden' name='id' value=order.id id='id')
+    .mui-textfield
+      button(type="submit", name="add")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+        i.fa.fa-plus
+        strong &nbsp; Add

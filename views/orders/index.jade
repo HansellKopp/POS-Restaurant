@@ -2,85 +2,80 @@ extends ../layout
 
 block content
   #payload(data-orders=orders, data-title=title)
-  table#grid
+  h2#title
+    = title
+  #grid.mui-container-fluid
+    #gridRow.mui-row
   script.
     // define constants
     //
     const grid =  document.getElementById('grid')
-    const data = JSON.parse(document.getElementById('payload').dataset.orders)
+    let data = JSON.parse(document.getElementById('payload').dataset.orders)
     const title = document.getElementById('payload').dataset.title
-    const actions = [ 
-      { 
-        url: '/orders/delete/', 
-        icon:  'fa-times',
-        color: 'mui--text-accent',
-        eventListener: onLinkClick
-      },
-      { 
-        url: '/orders/edit/', 
-        icon:  'fa-pencil',
-        color: 'mui--text-primary',
-        eventListener: onLinkClick
-      }
-    ]
 
-    function renderPanel(data){
+    // render order
+    //
+    function renderOrder(item){
       var panel = document.createElement('div')
-      div.addClass('mui-panel')
-      var title = document.createElement('h2')
-      title.createTextNode('data.number')
-      var subtitle = document.createElement('p')
-      subtitle.createTextNode('data.amount')
+      panel.className += 'mui-panel mui-col-sm-2'
+      var title = document.createElement('strong')
+      title.append(document.createTextNode(item.number))
+      var openTime = document.createElement('div')
+      openTime.append(document.createTextNode(
+        moment(item.createdAt, "hmm").format("HH:mm") 
+      ))
+      var total = 0
+      item.OrderDetails.forEach(
+        (s) => total+= s .price * s.quantity
+      )
+      var amount = document.createElement('div')
+      amount.append(document.createTextNode(total))
+      amount.className += 'mui--text-right'
       panel.append(title)
+      panel.append(openTime)
+      panel.append(amount)
+      panel.addEventListener('click',() => onEditClick(item.number))
       return panel
     }
+
+    // render new
+    //
+    function renderNew() {
+      var button = makeActionButton(
+                'fa-edit', 'mui--text-primary',
+                'add',
+                onAddClick
+            )
+      return button
+    }
+
     // start script
     $(document).ready(function(){
         renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Orders', href: '/orders'}
         ])
-        // 
-        //
-        
-        // renderOrders()
+        $('#title').append(document.createTextNode(' '))
+        $('#title').append(renderNew())
+        $('#gridRow').empty()
+        $.get("/api/orders").done( 
+          (data) => {
+            data.orders.forEach((s) => {
+              $('#gridRow').append(renderOrder(s))
+            })
+          }).fail( (err)=> $.handleErrors(err) )
     })
-
-    // Render Orders
-    //
-    function renderOrders ( value ) {
-      const token = $( this ).val().toUpperCase()
-      var currentData = data.filter((s) => 
-        s.username.toUpperCase().startsWith(token) || s.email.toUpperCase().startsWith(token)
-      )
-      $('#grid').empty()
-    }
-
-    // manage Edit and Delete actions 
-    //
-    function onLinkClick( event ) {
-      event.preventDefault()
-      var target = event.target || event.srcElement
-      var element = target.nodeName === 'I'? target.parentNode : target
-      var urlArray = element.href.split('/')
-      var verb = urlArray[urlArray.length - 2]
-      var id = urlArray[urlArray.length - 1]
-      switch( verb ) {
-        case 'delete':
-           $.delete(
-            `/api/orders/${id}`
-            ).done(function( data ) {
-            window.location.href = '/orders/'
-          })
-          break
-        case 'edit':
-          window.location.href = `/orders/edit/${id}`
-          break
-      }
-    }
 
     // manage add button
     //
     function onAddClick() {
-      window.location.href = '/orders/create'
+      window.location.href = '/orders/edit'
     }
+
+    // manage edit order
+    //
+    function onEditClick(number) {
+      window.location.href = `/orders/edit/${number}`
+    }
+
+    
