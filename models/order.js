@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Order = sequelize.define('Order', {
-    number: {
+    table: {
       type: DataTypes.STRING,
       unique: true,
       validate: {

@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var OrderDetail = sequelize.define("OrderDetail", {
-    number: DataTypes.INTEGER,
+    code: DataTypes.STRING,
     description: DataTypes.STRING(255),
     tags: DataTypes.STRING,
     quantity: DataTypes.DOUBLE,

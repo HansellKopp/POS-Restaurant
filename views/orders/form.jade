@@ -1,41 +1,32 @@
-form#order.mui-form.mui-form--inline
-  legend 
-    h2
-      i.fa.fa-edit
-      span &nbsp; 
-      = title
-      
-  .mui-row
+h2
+  i.fa.fa-edit
+  span &nbsp; 
+  = title  
+  &nbsp;Table:&nbsp;
+  = order.table
+.mui-panel
+  form#order.mui-form--inline
+    legend New Item
     .mui-textfield
-      button(
-        id="number"
-        type="button",
-        onclick="activateModalTable()",
-        value = order.table
-        ).mui-btn Table
-  .mui-row
+      input(type="text" name="quantity" id="quantity" 
+       onclick="activateModalQuantity()").mui-btn
+      label Quantity
     .mui-textfield
-      button(
-        id="quantity",
-        type="button",
-        onclick="activateModalQuantity()",
-        value = order.quantity
-        ).mui-btn quantity
+      input(type="text" name="code" id="code" 
+        onclick="activateModalProduct()").mui-btn 
+      label Code
     .mui-textfield
-      button(
-        id="product",
-        type="button",
-        onclick="activateModalProduct()",
-        value = order.product
-        ).mui-btn Product
+      input(type="text" name="description" id='description' readonly).mui-btn 
+      label Description
     .mui-textfield
-      button(type="text" id='description' readonly).mui-btn Description
+      input(type="text", name="price" id="price" readonly).mui-btn
+      label Price
     .mui-textfield
-      button(type="text", id="price" readonly).mui-btn Price
+      input(type="text", id="total" readonly).mui-btn
+      label Total
+    input(type='hidden' name='id' value=order.id)
+    input(type="hidden" name="table" value=order.table)
     .mui-textfield
-      button(type="text", id="total" readonly).mui-btn Total
-    input(type='hidden' name='id' value=order.id id='id')
-    .mui-textfield
-      button(type="submit", name="add")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+      button(type="submit", name="add")#submit-button.mui-btn.mui-btn--primary.mui-btn--raised.mui--pull-right
         i.fa.fa-plus
         strong &nbsp; Add

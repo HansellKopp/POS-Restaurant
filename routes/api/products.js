@@ -8,7 +8,7 @@ var router  = express.Router()
 //
 router.get('/', function(req, res) {
   models.Product.findAll({
-    attributes: ['number','description','price','image_url','id'],
+    attributes: ['code','description','price','image_url','id'],
     order: [
       ['description','ASC']
     ],
@@ -24,11 +24,11 @@ router.get('/', function(req, res) {
 
 // retrieve product by id
 //
-router.get('/number/:product_number', function(req, res) {
+router.get('/code/:product_code', function(req, res) {
   models.Product.findAll({
-    attributes: ['number','description','price','id'],
+    attributes: ['code','description','price','id'],
     where: {
-      number: req.params.product_number
+      code: req.params.product_code
     }
   })
     .then(function(products) {
@@ -56,13 +56,13 @@ router.delete('/:product_id', function(req, res) {
 router.put('/:product_id', function(req, res) {
   models.Product.update(
     { 
-        number: req.body.number,
+        code: req.body.code,
         description: req.body.description,
         price: req.body.price,
         image_url: req.body.image_url,
     },
     {
-      fields: ['number', 'description', 'price', 'image_url'],
+      fields: ['code', 'description', 'price', 'image_url'],
       where: {
         id: req.params.product_id
       }

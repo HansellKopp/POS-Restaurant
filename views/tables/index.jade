@@ -9,6 +9,7 @@ block content
   script.
     // define constants
     //
+    const fields = ['place','number','seats','id']
     const data = JSON.parse(document.getElementById('payload').dataset.tables)
     const title = document.getElementById('payload').dataset.title
     const actions = [ 
@@ -33,8 +34,8 @@ block content
           { text: 'Tables', href: '/tables'}
         ])
         $('#tableCaption').append(makeCaption(title, 'fa-database'))
-        $('#tableHeader').append(makeHeader(['Place','Number','Seats','id']))
-        $('#tableBody').append(makeBody(data, actions ))
+        $('#tableHeader').append(makeHeader(fields))
+        $('#tableBody').append(makeBody(fields,data, actions ))
         $('#searchBox').keyup(renderFilter)
 
     })

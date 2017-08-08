@@ -198,9 +198,16 @@ html,
     /**
      * Modal overlays
      */
-     .modal {
+    .modal {
         width: '90%';
         height: 'auto';
         margin: '100px auto';
+        background-color: '#fff';
+     }
+
+    /**
+     * Modal overlays
+     */
+    #formular {
         background-color: '#fff';
      }

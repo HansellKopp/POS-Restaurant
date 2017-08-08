@@ -57,7 +57,7 @@ router.get('/:category_id/products', (req, res) => {
     where: {id: id},
     include: [{
       model: models.Product,
-      attributes: ['number', 'description', 'image_url', 'price', 'id']
+      attributes: ['code', 'description', 'image_url', 'price', 'id']
     }]
   }).then(function(data) {
     if(data === null) {

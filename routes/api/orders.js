@@ -24,13 +24,13 @@ router.get('/', function(req, res) {
 //
 router.post('/', function(req, res) {
   models.Order.findOrCreate({
-      where: {number: req.body.table}, 
-    defaults: {number: req.body.table}
+      where: {table: req.body.table}, 
+    defaults: {table: req.body.table}
   }).then((s) => {
       const newId = s[0].dataValues.id
       models.OrderDetail.create({
         OrderId: newId,
-        number: req.body.number,
+        code: req.body.code,
         quantity: req.body.quantity,
         product: req.body.product,
         description: req.body.description,

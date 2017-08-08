@@ -9,6 +9,7 @@ block content
   script.
     // define constants
     //
+    const fields = ['username','email','id']
     const data = JSON.parse(document.getElementById('payload').dataset.users)
     const title = document.getElementById('payload').dataset.title
     const actions = [ 
@@ -33,8 +34,8 @@ block content
           { text: 'Users', href: '/users'}
         ])
         $('#tableCaption').append(makeCaption(title, 'fa-user'))
-        $('#tableHeader').append(makeHeader(['Username','Email','id']))
-        $('#tableBody').append(makeBody(data, actions ))
+        $('#tableHeader').append(makeHeader(fields))
+        $('#tableBody').append(makeBody(fields,data, actions ))
         $('#searchBox').keyup(renderFilter)
 
     })

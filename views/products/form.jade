@@ -7,18 +7,18 @@ form#product.mui-form
   input(type='hidden' name='product_id' value=data.id id='product_id')
   input(type='hidden' name='category_id' value=data.CategoryId id='category_id')
   .mui-textfield
-    input(type="number", name="number", value=data.number, required autofocus)
-    label number
+    input(type="code", name="code", value=data.code, required autofocus)
+    label Code
     span#error-number.mui--text-danger.errorField
   .mui-textfield
     input(type="text", name="description", value=data.description, required)
-    label description
+    label Description
   .mui-textfield
     input(type="text", name="image_url", value=data.image_url, required)
-    label image
+    label Image
   .mui-textfield
     input(type="text", name="price", value=data.price, required)
-    label price
+    label Price
   
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
     i.fa.fa-floppy-o 

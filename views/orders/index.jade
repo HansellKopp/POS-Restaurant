@@ -19,7 +19,7 @@ block content
       var panel = document.createElement('div')
       panel.className += 'mui-panel mui-col-sm-2'
       var title = document.createElement('strong')
-      title.append(document.createTextNode(item.number))
+      title.append(document.createTextNode(item.table))
       var openTime = document.createElement('div')
       openTime.append(document.createTextNode(
         moment(item.createdAt, "hmm").format("HH:mm") 
@@ -34,7 +34,7 @@ block content
       panel.append(title)
       panel.append(openTime)
       panel.append(amount)
-      panel.addEventListener('click',() => onEditClick(item.number))
+      panel.addEventListener('click',() => onEditClick(item.table))
       return panel
     }
 
@@ -69,13 +69,32 @@ block content
     // manage add button
     //
     function onAddClick() {
-      window.location.href = '/orders/edit'
+      activateModalTable()
+      // window.location.href = '/orders/edit'
     }
 
     // manage edit order
     //
-    function onEditClick(number) {
-      window.location.href = `/orders/edit/${number}`
+    function onEditClick(table) {
+      window.location.href = `/orders/edit/${table}`
     }
 
-    
+    // Table selection modal window
+    //
+    function activateModalTable() {
+      $.get("/api/tables").done( 
+          (data) => {
+            modal = createModal(
+              'modalTable','Tables', 
+              data.tables.map((s) => s.number),
+              selectTable              
+            )
+          }
+        ).fail( (err)=> $.handleErrors(err) )
+    }
+
+        // Table selection event handler
+    //
+    function selectTable(item) {
+      window.location.href = `/orders/edit/${item}`
+    }

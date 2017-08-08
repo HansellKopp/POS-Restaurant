@@ -191,7 +191,7 @@ function makeHeader(item) {
     $.each(item, function(key, value) {
         var cell = document.createElement('th')
         if(value !== 'id') {
-          cell.appendChild(document.createTextNode(value))
+          cell.appendChild(document.createTextNode(value.toUpperCase()))
         } else {
           
         }
@@ -203,22 +203,22 @@ function makeHeader(item) {
 
 // Table body rows
 //
-function makeBody(data, actions) {
+function makeBody(fields, data, actions) {
     var fragment = document.createDocumentFragment()
     $.each(data, function(key, value) {
         var row = document.createElement('tr')
-        $.each(value, function(childKey, childValue) {
+        $.each(fields, function(index, key) {
+            var childValue = value[key]
             var cell = document.createElement('td')
-            if(childKey !== 'id') {
+            if(key !== 'id') {
                 // fill data columns
                 cell.appendChild(document.createTextNode(childValue))
-                cell.className = isNaN(childValue) ? '' : 'mui--text-right'
+                cell.className = isNaN(childValue) ? '' : 'mui--text-center'
                 row.appendChild(cell);
             } else {
             // create actions buttons
                 var span = document.createElement('span')
                 span.className = 'mui--pull-right'
-                console.log(actions, value)
                 actions.forEach( (action) => {
                     var link = makeActionLink(
                         `${action.url}${value.id}`,

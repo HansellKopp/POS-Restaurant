@@ -75,7 +75,7 @@ router.put('/:category_id', function(req, res) {
 router.post('/products', function(req, res) {
     models.Product.create({
         CategoryId: req.body.category_id,
-        number: req.body.number,
+        code: req.body.code,
         description: req.body.description,
         image_url: req.body.image_url,
         price: req.body.price   

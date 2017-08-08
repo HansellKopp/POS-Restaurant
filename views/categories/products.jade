@@ -9,6 +9,7 @@ block content
   script.
     // define constants
     //
+    const fields = ['number','decription', 'image_url', 'price', 'id']
     const data = JSON.parse(document.getElementById('payload').dataset.data)
     const title = document.getElementById('payload').dataset.title
     const sortProducts = data.Products.sort(
@@ -38,8 +39,8 @@ block content
           { text: 'Products', href: `/categories/${data.id}/products/`}
       ])
       $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
-      $('#tableHeader').append(makeHeader(['Number','Decription', 'Image_url', 'Price', 'id']))
-      $('#tableBody').append(makeBody(sortProducts, actions ))
+      $('#tableHeader').append(makeHeader(fields))
+      $('#tableBody').append(makeBody(fields, sortProducts, actions ))
       $('#searchBox').keyup(renderFilter)
     })
 

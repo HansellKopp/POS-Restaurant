@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Product = sequelize.define("Product", {
-    number: { 
-      type: DataTypes.INTEGER,
+    code: { 
+      type: DataTypes.STRING,
       unique: true,
       validate: {
          notEmpty: true

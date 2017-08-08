@@ -9,6 +9,7 @@ block content
   script.
     // define constants
     //
+    const fields = ['description', 'id']
     const title = document.getElementById('payload').dataset.title
     const data = JSON.parse(document.getElementById('payload').dataset.categories)  
     const actions = [
@@ -40,8 +41,8 @@ block content
         { text: 'Categories', href: '/categories'}
       ])
       $('#tableCaption').append(makeCaption(title, 'fa-tags'))
-      $('#tableHeader').append(makeHeader(['Description', 'id']))
-      $('#tableBody').append(makeBody(data, actions ))
+      $('#tableHeader').append(makeHeader(fields))
+      $('#tableBody').append(makeBody(fields,data, actions ))
       $('#searchBox').keyup(renderFilter)
     })
 

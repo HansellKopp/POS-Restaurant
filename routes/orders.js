@@ -9,7 +9,7 @@ var router  = express.Router()
 router.get('/', function(req, res) {
   models.Order.findAll({
     order: [
-      ['number', 'ASC']
+      ['table', 'ASC']
     ],
     include: [
      { model: models.OrderDetail }
@@ -22,35 +22,25 @@ router.get('/', function(req, res) {
   })
 })
 
-// route orders/create
-//
-router.get('/edit/:table?', (req, res) => {
-    res.render('./orders/edit', {
-      title: 'Edit order',
-      order: { 
-        table: req.params.table,
-        quantity: 1,
-        product: null,
-        description: null,
-        price: 0,
-        total: 0
-      },
-      errors: ''
-    })
-})
-
 // route orders/edit/id
 //
-router.get('/edit/:order_id', (req, res) => {
+router.get('/edit/:table', (req, res) => {
     var id =  req.params.order_id
     models.Order.find({
-      where: {id: id},
+      where: {table: req.params.table},
       include: [{
       model: models.OrderDetail,
-      attributes: ['number', 'description', 'image_url', 'price', 'id']
+      attributes: ['quantity', 'code', 'description', 'price', 'id']
       }]
     }
     ).then(function(order) {
+      if(!order) {
+          order = {
+          id: null, 
+          table: req.params.table,
+          OrderDetails: []
+        }
+      }
       res.render('./orders/edit', {
         title: 'Edit order',
         order: order,
