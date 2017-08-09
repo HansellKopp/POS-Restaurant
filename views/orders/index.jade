@@ -19,9 +19,9 @@ block content
       var panel = document.createElement('div')
       panel.className += 'mui-panel mui-col-sm-2'
       var title = document.createElement('strong')
-      title.append(document.createTextNode(item.table))
+      title.appendChild(document.createTextNode(item.table))
       var openTime = document.createElement('div')
-      openTime.append(document.createTextNode(
+      openTime.appendChild(document.createTextNode(
         moment(item.createdAt, "hmm").format("HH:mm") 
       ))
       item.total = 0
@@ -29,11 +29,11 @@ block content
         (s) => item.total+= s .price * s.quantity
       )
       var amount = document.createElement('div')
-      amount.append(document.createTextNode(item.total))
+      amount.appendChild(document.createTextNode(item.total))
       amount.className += 'mui--text-right'
-      panel.append(title)
-      panel.append(openTime)
-      panel.append(amount)
+      panel.appendChild(title)
+      panel.appendChild(openTime)
+      panel.appendChild(amount)
       panel.addEventListener('click',() => window.location.href = `/orders/edit/${item.table}`)
       return panel
     }
