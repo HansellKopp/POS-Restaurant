@@ -11,7 +11,7 @@ block content
   script.
     // define variables
     //
-    let order =  JSON.parse(document.getElementById('payload').dataset.order)
+    let orderData =  JSON.parse(document.getElementById('payload').dataset.order)
     const fields = ['quantity', 'code', 'description', 'price', 'total', 'id']
     const actions = [{ 
         url: '/orders/detail/delete/', 
@@ -36,7 +36,7 @@ block content
           "/api/orders",
           item
           ).done((s) => {
-            order.OrderDetails.push(
+            orderData.OrderDetails.push(
               {
                 quantity: s.data.quantity,
                 code: s.data.code,
@@ -53,45 +53,25 @@ block content
     })
 
     function orderTotalize() {
-      order.total = 0
-      order.OrderDetails.map(
+      orderData.total = 0
+      orderData.OrderDetails.map(
         s => { 
           s.total = s.quantity * s.price
-          order.total += s.total
+          orderData.total += s.total
         }
       )
-      $('#orderTotal').text(`Order total: ${order.total.toLocaleString()}`)
+      $('#orderTotal').text(`Order total: ${orderData.total.toLocaleString()}`)
     }
     function renderDetails() {
       orderTotalize()
         $('#tableBody').empty()
         $('#tableBody').append(makeBody(
           fields,
-          order.OrderDetails, 
+          orderData.OrderDetails, 
           actions )
         )
         $('#tableFooter').empty()
         
-    }
-    // makeFooter
-    //
-    function makeFooter(order) {
-      var total = 0
-      order.OrderDetails.forEach(
-        (s) => total+= s .price * s.quantity
-      )
-      var footer = document.createElement('tfoot')
-      var row = document.createElement('tr')
-      var label = document.createElement('td')
-      var h2 = document.createElement('h2')
-      label.appendChild(document.createTextNode('Total =>'))
-      var value = document.createElement('td')
-      h2.appendChild(document.createTextNode(total.toLocaleString()))
-      value.appendChild(h2)
-      row.appendChild(label)
-      row.appendChild(value)
-      footer.appendChild(row)
-      return footer
     }
 
     // Quantity selection modal window
@@ -152,7 +132,7 @@ block content
       $.delete(
       `/api/orders/detail/${id}`
       ).done(() => {
-        order.OrderDetails = order.OrderDetails.filter(s => s.id !== id)
+        orderData.OrderDetails = orderData.OrderDetails.filter(s => s.id !== id)
         renderDetails()
       }
     )

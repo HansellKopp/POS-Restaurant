@@ -9,17 +9,16 @@ block content
   script.
     // define constants
     //
-    const grid =  document.getElementById('grid')
     let data = JSON.parse(document.getElementById('payload').dataset.orders)
-    const title = document.getElementById('payload').dataset.title
+    const caption = document.getElementById('payload').dataset.title
 
     // render order
     //
     function renderOrder(item){
       var panel = document.createElement('div')
       panel.className += 'mui-panel mui-col-sm-2'
-      var title = document.createElement('strong')
-      title.appendChild(document.createTextNode(item.table))
+      var caption = document.createElement('strong')
+      caption.appendChild(document.createTextNode(item.table))
       var openTime = document.createElement('div')
       openTime.appendChild(document.createTextNode(
         moment(item.createdAt, "hmm").format("HH:mm") 
@@ -31,7 +30,7 @@ block content
       var amount = document.createElement('div')
       amount.appendChild(document.createTextNode(item.total))
       amount.className += 'mui--text-right'
-      panel.appendChild(title)
+      panel.appendChild(caption)
       panel.appendChild(openTime)
       panel.appendChild(amount)
       panel.addEventListener('click',() => window.location.href = `/orders/edit/${item.table}`)
