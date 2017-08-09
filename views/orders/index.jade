@@ -26,7 +26,7 @@ block content
       ))
       item.total = 0
       item.OrderDetails.forEach(
-        (s) => total+= s .price * s.quantity
+        (s) => item.total+= s .price * s.quantity
       )
       var amount = document.createElement('div')
       amount.append(document.createTextNode(item.total))
