@@ -25,7 +25,6 @@ router.get('/', function(req, res) {
 // route orders/edit/id
 //
 router.get('/edit/:table', (req, res) => {
-    var id =  req.params.order_id
     models.Order.find({
       where: {table: req.params.table},
       include: [{

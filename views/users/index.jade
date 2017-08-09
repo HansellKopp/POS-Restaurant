@@ -29,15 +29,14 @@ block content
 
     // start script
     $(document).ready(function(){
-        renderBreadcrumb([
+      renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Users', href: '/users'}
-        ])
-        $('#tableCaption').append(makeCaption(title, 'fa-user'))
-        $('#tableHeader').append(makeHeader(fields))
-        $('#tableBody').append(makeBody(fields,data, actions ))
-        $('#searchBox').keyup(renderFilter)
-
+      ])
+      $('#tableCaption').append(makeCaption(title, 'fa-user'))
+      $('#tableHeader').append(makeHeader(fields))
+      $('#tableBody').append(makeBody(fields,data, actions ))
+      $('#searchBox').keyup(renderFilter)
     })
 
     // Render filtered data

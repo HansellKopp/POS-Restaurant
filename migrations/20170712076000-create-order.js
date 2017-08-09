@@ -10,7 +10,7 @@ module.exports = {
           autoIncrement: true,
           allowNull: false
         },
-        number: {
+        table: {
           type: Sequelize.STRING,
           allowNull: false
         },
@@ -22,7 +22,7 @@ module.exports = {
       })
   },
 
-  down: function (queryInterface, Sequelize) {
+  down: function (queryInterface) {
     return queryInterface
       .dropTable('Orders')
   }

@@ -24,17 +24,17 @@ block content
       openTime.append(document.createTextNode(
         moment(item.createdAt, "hmm").format("HH:mm") 
       ))
-      var total = 0
+      item.total = 0
       item.OrderDetails.forEach(
         (s) => total+= s .price * s.quantity
       )
       var amount = document.createElement('div')
-      amount.append(document.createTextNode(total))
+      amount.append(document.createTextNode(item.total))
       amount.className += 'mui--text-right'
       panel.append(title)
       panel.append(openTime)
       panel.append(amount)
-      panel.addEventListener('click',() => onEditClick(item.table))
+      panel.addEventListener('click',() => window.location.href = `/orders/edit/${item.table}`)
       return panel
     }
 
@@ -44,7 +44,7 @@ block content
       var button = makeActionButton(
                 'fa-edit', 'mui--text-primary',
                 'add',
-                onAddClick
+                activateModalTable
             )
       return button
     }
@@ -66,19 +66,6 @@ block content
           }).fail( (err)=> $.handleErrors(err) )
     })
 
-    // manage add button
-    //
-    function onAddClick() {
-      activateModalTable()
-      // window.location.href = '/orders/edit'
-    }
-
-    // manage edit order
-    //
-    function onEditClick(table) {
-      window.location.href = `/orders/edit/${table}`
-    }
-
     // Table selection modal window
     //
     function activateModalTable() {
@@ -93,7 +80,7 @@ block content
         ).fail( (err)=> $.handleErrors(err) )
     }
 
-        // Table selection event handler
+    // Table selection event handler
     //
     function selectTable(item) {
       window.location.href = `/orders/edit/${item}`

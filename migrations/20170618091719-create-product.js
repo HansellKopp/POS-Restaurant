@@ -10,7 +10,7 @@ module.exports = {
           autoIncrement: true,
           allowNull: false
         },
-        number : Sequelize.INTEGER,
+        code : Sequelize.STRING,
         description: {
           type: Sequelize.STRING(255)
         },
@@ -35,7 +35,7 @@ module.exports = {
       })
   },
 
-  down: function (queryInterface, Sequelize) {
+  down: function (queryInterface) {
     return queryInterface
       .dropTable('Products')
   }

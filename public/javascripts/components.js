@@ -187,7 +187,7 @@ function makeCaption(title, icon) {
 //
 function makeHeader(item) {
     var fragment = document.createDocumentFragment();
-    row = document.createElement('tr')
+    var row = document.createElement('tr')
     $.each(item, function(key, value) {
         var cell = document.createElement('th')
         if(value !== 'id') {
@@ -197,7 +197,7 @@ function makeHeader(item) {
         }
         row.appendChild(cell);
     })
-    fragment.append(row)
+    fragment.appendChild(row)
     return fragment
 }
 

@@ -22,8 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true, 
       }
     },
-  },
-  
+  }
   )
 
   return User
