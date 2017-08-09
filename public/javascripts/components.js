@@ -80,9 +80,9 @@ function renderOptions(element,data) {
     $.each(data.places, function(key, value) {
         var option = document.createElement('option')
         option.setAttribute('value', value.place)
-        items.append(option)
+        items.appendChild(option)
     })
-    element.append(items)
+    element.appendChild(items)
 }
 
 // Breadcrumb
@@ -96,10 +96,10 @@ function renderBreadcrumb(options) {
         actionLink.href = value.href
         actionLink.appendChild(document.createTextNode(value.text))
         item.appendChild(actionLink)
-        fragment.append(item)
+        fragment.appendChild(item)
     })
     breadcrumb.empty()
-    breadcrumb.append(fragment)
+    breadcrumb.appendChild(fragment)
 }
 
 // Search Box
@@ -179,7 +179,7 @@ function makeCaption(title, icon) {
     col.className = 'mui--pull-right'
     row.appendChild(col)
     container.appendChild(row)
-    fragment.append(container)
+    fragment.appendChild(container)
     return fragment
 }
 
@@ -228,11 +228,11 @@ function makeBody(fields, data, actions) {
                     )
                     span.appendChild(link)
                 })
-                cell.append(span)
+                cell.appendChild(span)
                 row.appendChild(cell)
             }
         })
-        fragment.append(row)
+        fragment.appendChild(row)
     })
     return fragment
 }
@@ -292,22 +292,22 @@ function createModal(modalId, caption, data, eventListener) {
     var container = document.createElement('div')
     container.className = 'mui-container-fluid'
     var title = document.createElement('h2')
-    title.append(document.createTextNode(caption))
+    title.appendChild(document.createTextNode(caption))
     title.className = 'mui--text-left'
     var divider = document.createElement('div')
     divider.className = 'mui-divider'
     // var tabs = createTabs(groups)
     // container.append(tabs)
-    container.append(title)
-    container.append(divider)
-    modal.append(container)
+    container.appendChild(title)
+    container.appendChild(divider)
+    modal.appendChild(container)
     var row = document.createElement('div')
     row.className = 'mui-row'
     row.style.marginLeft = '2px'
     data.map((s) => {
-        row.append(renderElement(s, eventListener))
+        row.appendChild(renderElement(s, eventListener))
     })
-    container.append(row)
+    container.appendChild(row)
     mui.overlay('on',modal)
     return modal
 }
@@ -328,7 +328,7 @@ function renderElement(item, eventListener){
             button.appendChild(p)
         }
     } else {
-        button.append(document.createTextNode(item))
+        button.appendChild(document.createTextNode(item))
     }
     
     button.addEventListener('click',() => eventListener(item))
