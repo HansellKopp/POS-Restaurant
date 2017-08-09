@@ -29,10 +29,10 @@ block content
 
     // start script
     $(document).ready(function(){
-        renderBreadcrumb([
+        $('#breadcrumb').append(renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Tables', href: '/tables'}
-        ])
+        ]))
         $('#tableCaption').append(makeCaption(title, 'fa-database'))
         $('#tableHeader').append(makeHeader(fields))
         $('#tableBody').append(makeBody(fields,data, actions ))

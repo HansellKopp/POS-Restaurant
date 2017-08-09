@@ -10,11 +10,11 @@ block content
     // start script
     //
     $(document).ready(function(){
-      renderBreadcrumb([
+      $('#breadcrumb').append(renderBreadcrumb([
         { text: 'Home', href: '/'},
         { text: 'Categories', href: '/categories'},
         { text: 'Create', href: '/categories/create'}
-      ])
+      ]))
       $( "#category" ).submit( (event) => {
         event.preventDefault()
         $.post(

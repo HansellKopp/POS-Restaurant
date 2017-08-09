@@ -6,11 +6,11 @@ block content
     // Start script
     //
     $(document).ready(function(){
-      renderBreadcrumb([
+      $('#breadcrumb').append(renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Users', href: '/users'},
           { text: 'Create', href: '/users/create'}
-      ])
+      ]))
       $( "#user" ).submit( (event) => {
         event.preventDefault()
         $.post(

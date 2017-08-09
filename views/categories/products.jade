@@ -33,11 +33,11 @@ block content
     // start script
     //
     $(document).ready(function() {
-      renderBreadcrumb([
+      $('#breadcrumb').append(renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Categories', href: '/categories'},
           { text: 'Products', href: `/categories/${data.id}/products/`}
-      ])
+      ]))
       $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
       $('#tableHeader').append(makeHeader(fields))
       $('#tableBody').append(makeBody(fields, sortProducts, actions ))

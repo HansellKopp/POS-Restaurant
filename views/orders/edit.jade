@@ -22,11 +22,11 @@ block content
     // start script
     //
     $(document).ready(function(){
-      renderBreadcrumb([
+      $('#breadcrumb').append(renderBreadcrumb([
         { text: 'Home', href: '/'},
         { text: 'Orders', href: '/orders'},
         { text: 'Edit', href: '/orders/edit'}
-      ])
+      ]))
       $('#tableHeader').append(makeHeader(fields))
       renderDetails()
       $( "#order" ).submit( (event) => {

@@ -88,7 +88,6 @@ function renderOptions(element,data) {
 // Breadcrumb
 //
 function renderBreadcrumb(options) {
-    const breadcrumb = $('#breadcrumb')
     var fragment = document.createDocumentFragment();
     $.each(options, function(key, value) {
         var item = document.createElement('li')
@@ -98,8 +97,7 @@ function renderBreadcrumb(options) {
         item.appendChild(actionLink)
         fragment.appendChild(item)
     })
-    breadcrumb.empty()
-    breadcrumb.appendChild(fragment)
+    return fragment
 }
 
 // Search Box

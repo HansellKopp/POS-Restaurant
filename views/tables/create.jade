@@ -11,11 +11,11 @@ block content
     $(document).ready(function(){
       // render navigation breadcrumb
       //
-      renderBreadcrumb([
+      $('#breadcrumb').append(renderBreadcrumb([
           { text: 'Home', href: '/'},
           { text: 'Tables', href: '/tables'},
           { text: 'Create', href: '/tables/create'}
-      ])
+      ]))
 
       // render places autocomplete options
       //
