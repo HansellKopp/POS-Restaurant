@@ -77,12 +77,12 @@ $.handleErrors = function(err) {
 // 
 function renderOptions(element,data) {
     var items = document.createDocumentFragment()
-    $.each(data.places, function(key, value) {
+    $.each(data.places, (key, value) => {
         var option = document.createElement('option')
         option.setAttribute('value', value.place)
         items.appendChild(option)
     })
-    element.appendChild(items)
+    element.append(items)
 }
 
 // Breadcrumb
@@ -188,7 +188,7 @@ function makeHeader(item) {
     var row = document.createElement('tr')
     $.each(item, function(key,value) {
         var cell = document.createElement('th')
-        if(value.field) {
+        if(value.label) {
           let caption = value.label.toUpperCase()
           cell.appendChild(document.createTextNode(caption))
         } 
@@ -200,16 +200,15 @@ function makeHeader(item) {
 
 // Table body rows
 //
-function makeBody(fields, data, actions) {
+function makeBody(fields, rows, actions) {
     var fragment = document.createDocumentFragment()
-    $.each(data, function(rowKey, value) {
+    $.each(rows, (rowKey, item) => {
         var row = document.createElement('tr')
-        $.each(fields, function(index, fieldKey) {
+        $.each(fields, (index, field) => {
             var cell = document.createElement('td')
-            if(fieldKey.field) {
-                // fill data columns
-                cell.appendChild(document.createTextNode(value[fieldKey.field]))
-                cell.className = isNaN(value[fieldKey.field]) ? '' : 'mui--text-center'
+            if(field.label) {
+                cell.appendChild(document.createTextNode(item[field.field]))
+                cell.className = isNaN(item[field.field]) ? '' : 'mui--text-center'
                 row.appendChild(cell);
             } else {
                 // create actions buttons
@@ -217,7 +216,7 @@ function makeBody(fields, data, actions) {
                 span.className = 'mui--pull-right'
                 actions.forEach( (action) => {
                     var link = makeActionLink(
-                        `${action.url}${value.id}`,
+                        `${action.url}${item.id}`,
                         action.icon,
                         action.color,
                         action.eventListener

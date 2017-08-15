@@ -14,7 +14,8 @@ router.get('/', function(req, res) {
     ]
   }).then(function(categories) {
     res.render('./categories/index', {
-      title: 'Categories list',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.categories.list'),
       categories: categories
     })
   })
@@ -24,7 +25,8 @@ router.get('/', function(req, res) {
 //
 router.get('/create', (req, res) => {
     res.render('./categories/create', {
-      title: 'Create category',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.categories.create'),
       data: {
         'id' : null,
         'description': ''
@@ -41,7 +43,8 @@ router.get('/edit/:category_id', (req, res) => {
       id
     ).then(function(data) {
       res.render('./categories/edit', {
-        title: 'Edit category',
+        polyglot: res.polyglot,
+        title: res.polyglot.t('views.categories.edit'),
         data,
         errors: ''
       })
@@ -62,7 +65,8 @@ router.get('/:category_id/products', (req, res) => {
   }).then(function(data) {
     if(data === null) {
       res.render('./categories/products', {
-        title: ` Category not found`,
+        polyglot: res.polyglot,
+        title: res.polyglot.t('views.categories.not_found'),
         data: {
           description: 'not found',
           id: null,
@@ -71,9 +75,10 @@ router.get('/:category_id/products', (req, res) => {
       })
     } else {
       res.render('./categories/products', {
-      title: ` Category: ${data.description} > products`,
-      data: data
-    })
+        polyglot: res.polyglot,
+        title: ` ${res.polyglot.t('views.categories.products.list')}:${data.description}`,
+        data: data
+      })
     }
   })
 })
@@ -87,10 +92,11 @@ router.get('/:category_id/products/create', (req, res) => {
       attributes: ['description','id']
     }).then( (category) => {
         res.render('./products/create', {
+          polyglot: res.polyglot,
+          title: res.polyglot.t('views.categories.products.create'),
           data: { 
             "CategoryId": category.id
           },
-          title: `Category: ${category.description} - Create Product`,
           errors: ''
         })
     })
@@ -104,8 +110,9 @@ router.get('/:category_id/products/edit/:product_id', (req, res) => {
       where: {id: id}
     }).then( (product) => {
       res.render('./products/edit', {
+          polyglot: res.polyglot,
+          title: res.polyglot.t('views.categories.products.edit'),
           data: product.dataValues,
-          title: 'Edit Product',
           errors: ''
         })
     })

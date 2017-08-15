@@ -7,10 +7,10 @@ form#category.mui-form
       
   .mui-textfield
     input(type="text", name="description", value=data.description required autofocus)
-    label description
+    label #{polyglot.t('fields.categories.description')}
     span#error-description.mui--text-danger.errorField
   input(type='hidden' name='id' value=data.id id='id')
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
     i.fa.fa-floppy-o 
-    strong &nbsp; Save
+    strong &nbsp; #{polyglot.t('forms.buttons.save')}
     

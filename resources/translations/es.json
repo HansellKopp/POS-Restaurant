@@ -2,13 +2,25 @@
   "nav": {
     "files": "Archivos",
     "init_db": "Inicializar BD",
-    "app_name": "Punto de Venta Restaurante"
+    "app_name": "Punto de Venta Restaurante",
+    "app_message": "Hecho con ♥ en"
   },
   "views": {
     "users": {
       "list": "Listado de usuarios",
       "create": "Crear usuario",
       "edit": "Editar usuario"
+    },
+    "categories": {
+      "list": "Listado de categorias",
+      "create": "Crear categoria",
+      "edit": "Editar categoria",
+      "not_found": "Categoria Inexistente",
+      "products": {
+        "list": "Listado de productos",
+        "create": "Crear Producto",
+        "edit": "Editar Producto"
+      }
     },
     "tables": {
       "list": "Listado de mesas",
@@ -19,6 +31,10 @@
       "list": "Listado Mesas con pedidos",
       "create": "Crear pedido",
       "edit": "Editar pedidos"
+    },
+    "orders_details": {
+      "new": "Nuevo producto",
+      "total": "Monto total del pedido"
     }
   },
   "menu": {

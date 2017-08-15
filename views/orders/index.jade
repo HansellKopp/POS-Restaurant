@@ -39,10 +39,10 @@ block content
 
     // render new
     //
-    function renderNew() {
+    function renderNew(caption) {
       var button = makeActionButton(
                 'fa-edit', 'mui--text-primary',
-                'add',
+                caption,
                 activateModalTable
             )
       return button
@@ -50,12 +50,19 @@ block content
 
     // start script
     $(document).ready(function(){
+        // Translations
+        //
+        const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+        const polyglot = new Polyglot({
+            phrases,
+            currentLocale
+        })
         $('#breadcrumb').append(renderBreadcrumb([
-          { text: 'Home', href: '/'},
-          { text: 'Orders', href: '/orders'}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.orders'), href: '/orders'}
         ]))
         $('#title').append(document.createTextNode(' '))
-        $('#title').append(renderNew())
+        $('#title').append(renderNew(polyglot.t('forms.buttons.add')))
         $('#gridRow').empty()
         $.get("/api/orders").done( 
           (data) => {

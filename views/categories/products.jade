@@ -9,7 +9,6 @@ block content
   script.
     // define constants
     //
-    const fields = ['code','description', 'image_url', 'price', 'id']
     const data = JSON.parse(document.getElementById('payload').dataset.data)
     const title = document.getElementById('payload').dataset.title
     const sortProducts = data.Products.sort(
@@ -33,12 +32,35 @@ block content
     // start script
     //
     $(document).ready(function() {
+      // 
+      // Translations
+      //
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
+      // Breadcrumb
       $('#breadcrumb').append(renderBreadcrumb([
-          { text: 'Home', href: '/'},
-          { text: 'Categories', href: '/categories'},
-          { text: 'Products', href: `/categories/${data.id}/products/`}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.categories'), href: '/categories'},
+          { text: polyglot.t('breadcrumb.products'), href: `/categories/${data.id}/products/`}
       ]))
-      $('#tableCaption').append(makeCaption(title, 'fa-cutlery'))
+      // Table
+      const fields = [
+        { field: 'code', label: polyglot.t('fields.products.code') },
+        { field: 'description', label: polyglot.t('fields.products.description')},
+        { field: 'image_url', label: polyglot.t('fields.products.image_url')},
+        { field: 'price', label: polyglot.t('fields.products.price')},
+        { filed: 'id' }
+      ]
+      $('#tableCaption').append(
+        makeCaption(
+          title,
+          'fa-cutlery',
+          polyglot.t('forms.buttons.add'),
+          polyglot.t('forms.placeholders.search')
+      ))
       $('#tableHeader').append(makeHeader(fields))
       $('#tableBody').append(makeBody(fields, sortProducts, actions ))
       $('#searchBox').keyup(renderFilter)

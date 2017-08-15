@@ -13,7 +13,8 @@ router.get('/', function(req, res) {
     order: ['place', 'number']
   }).then(function(data) {
     res.render('./tables/index', {
-      title: 'Tables list',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.tables.list'),
       tables: data
     })
   })
@@ -23,7 +24,8 @@ router.get('/', function(req, res) {
 //
 router.get('/create', (req, res) => {
     res.render('./tables/create', {
-      title: 'Create table',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.tables.create'),
       table: ['description'],
       errors: ''
     })
@@ -37,7 +39,8 @@ router.get('/edit/:table_id', (req, res) => {
       id
     ).then(function(table) {
       res.render('./tables/edit', {
-        title: 'Edit table',
+        polyglot: res.polyglot,
+        title: res.polyglot.t('views.tables.edit'),
         table: table,
         errors: ''
       })

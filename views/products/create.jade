@@ -11,11 +11,17 @@ block content
     // start script
     //
     $(document).ready(function(){
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
+      // Breadcrumb
       $('#breadcrumb').append(renderBreadcrumb([
-          { text: 'Home', href: '/'},
-          { text: 'Categories', href: '/categories'},
-          { text: 'Products', href: `/categories/${data.CategoryId}/products`},
-          { text: 'Create', href: `/categories/${data.CategoryId}/products/create`}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.categories'), href: '/categories'},
+          { text: polyglot.t('breadcrumb.products'), href: `/categories/${data.CategoryId}/products`},
+          { text: polyglot.t('breadcrumb.create'), href: `/categories/${data.CategoryId}/products/create`}
       ]))
       $( "#product" ).submit( (event) => {
         event.preventDefault()

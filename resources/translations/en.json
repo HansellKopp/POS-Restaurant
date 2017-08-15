@@ -2,7 +2,8 @@
   "nav": {
     "files": "Files",
     "init_db": "Init BD",
-    "app_name": "POS Restaurant"
+    "app_name": "POS Restaurant",
+    "app_message": "Made with ♥ in"
   },
   "views": {
     "users": {
@@ -19,6 +20,21 @@
       "list": "Order list",
       "create": "Create order",
       "edit": "Edit order"
+    },
+    "orders_details": {
+      "new": "New product",
+      "total": "Order total"
+    },
+    "categories": {
+      "list": "Categories List",
+      "create": "Create category",
+      "edit": "Edit category",
+      "not_found": "Category not found",
+      "products": {
+        "list": "Products list",
+        "create": "Create product",
+        "edit": "Edit product"
+      }
     }
   },
   "menu": {

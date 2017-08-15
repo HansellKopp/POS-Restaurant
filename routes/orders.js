@@ -16,7 +16,8 @@ router.get('/', function(req, res) {
     ],
   }).then(function(orders) {
     res.render('./orders/index', {
-      title: 'Orders list',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.orders.list'),
       orders: orders
     })
   })
@@ -41,7 +42,8 @@ router.get('/edit/:table', (req, res) => {
         }
       }
       res.render('./orders/edit', {
-        title: 'Edit order',
+        polyglot: res.polyglot,
+        title: res.polyglot.t('views.orders.edit'),
         order: order,
         errors: ''
       })
@@ -61,7 +63,8 @@ router.get('/:order_id/products/create', (req, res) => {
           data: { 
             "OrderId": order.id
           },
-          title: `Order: ${order.description} - Create Product`,
+          polyglot: res.polyglot,
+          title: res.polyglot.t('views.orders.create'),
           errors: ''
         })
     })
@@ -76,7 +79,8 @@ router.get('/:order_id/products/edit/:product_id', (req, res) => {
     }).then( (product) => {
       res.render('./products/edit', {
           data: product.dataValues,
-          title: 'Edit Product',
+          polyglot: res.polyglot,
+          title: res.polyglot.t('views.orders.edit'),
           errors: ''
         })
     })

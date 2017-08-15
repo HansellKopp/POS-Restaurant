@@ -9,14 +9,19 @@ block content
     // Start script
     //
     $(document).ready(function(){
-      // render navigation breadcrumb
+      // translations
       //
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
+      // Breadcrumb
       $('#breadcrumb').append(renderBreadcrumb([
-          { text: 'Home', href: '/'},
-          { text: 'Tables', href: '/tables'},
-          { text: 'Create', href: '/tables/create'}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.tables'), href: '/tables'},
+          { text: polyglot.t('breadcrumb.create'), href: '/tables/create'}
       ]))
-
       // render places autocomplete options
       //
       $.get("/api/tables/places", (data) => {

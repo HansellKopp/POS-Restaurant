@@ -9,7 +9,6 @@ block content
   script.
     // define constants
     //
-    const fields = ['description', 'id']
     const title = document.getElementById('payload').dataset.title
     const data = JSON.parse(document.getElementById('payload').dataset.categories)  
     const actions = [
@@ -36,11 +35,31 @@ block content
     // start script
     //
     $(document).ready(function(){
+      // Translations
+      //
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
+      // Breadbrumb
       $('#breadcrumb').append(renderBreadcrumb([
-        { text: 'Home', href: '/'},
-        { text: 'Categories', href: '/categories'}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.categories'), href: '/categories'}
       ]))
-      $('#tableCaption').append(makeCaption(title, 'fa-tags'))
+      $('#tableCaption').append(
+        makeCaption(
+          title, 
+          'fa-tags',
+          polyglot.t('forms.buttons.add'),
+          polyglot.t('forms.placeholders.search')
+        )
+      )
+      // Table
+      const fields = [
+        { field: 'description', label: polyglot.t('fields.categories.description') },
+        { filed: 'id' }
+      ]
       $('#tableHeader').append(makeHeader(fields))
       $('#tableBody').append(makeBody(fields,data, actions ))
       $('#searchBox').keyup(renderFilter)

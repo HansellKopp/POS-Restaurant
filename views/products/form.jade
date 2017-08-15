@@ -8,18 +8,18 @@ form#product.mui-form
   input(type='hidden' name='category_id' value=data.CategoryId id='category_id')
   .mui-textfield
     input(type="code", name="code", value=data.code, required autofocus)
-    label Code
+    label #{polyglot.t('fields.products.code')}
     span#error-number.mui--text-danger.errorField
   .mui-textfield
     input(type="text", name="description", value=data.description, required)
-    label Description
+    label #{polyglot.t('fields.products.description')}
   .mui-textfield
     input(type="text", name="image_url", value=data.image_url, required)
-    label Image
+    label #{polyglot.t('fields.products.image_url')}
   .mui-textfield
     input(type="text", name="price", value=data.price, required)
-    label Price
+    label #{polyglot.t('fields.products.price')}
   
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
     i.fa.fa-floppy-o 
-    strong &nbsp; Save
+    strong &nbsp; #{polyglot.t('forms.buttons.save')}

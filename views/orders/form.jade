@@ -2,31 +2,31 @@ h2
   i.fa.fa-edit
   span &nbsp; 
   = title  
-  &nbsp;Table:&nbsp;
+  &nbsp;:&nbsp;
   = order.table
 .mui-panel
   form#order.mui-form--inline
-    legend New Item
+    legend  #{polyglot.t('views.orders_details.new')}
     .mui-textfield
       input(type="text" name="quantity" id="quantity" 
        onclick="activateModalQuantity()").mui-btn
-      label Quantity
+      label #{polyglot.t('fields.orders_details.quantity')}
     .mui-textfield
       input(type="text" name="code" id="code" 
         onclick="activateModalProduct()").mui-btn 
-      label Code
+      label #{polyglot.t('fields.orders_details.code')}
     .mui-textfield
       input(type="text" name="description" id='description' readonly).mui-btn 
-      label Description
+      label #{polyglot.t('fields.orders_details.description')}
     .mui-textfield
       input(type="text", name="price" id="price" readonly).mui-btn
-      label Price
+      label #{polyglot.t('fields.orders_details.price')}
     .mui-textfield
       input(type="text", id="total" readonly).mui-btn
-      label Total
+      label #{polyglot.t('fields.orders_details.total')}
     input(type='hidden' name='id' value=order.id)
     input(type="hidden" name="table" value=order.table)
     .mui-textfield
       button(type="submit", name="add")#submit-button.mui-btn.mui-btn--primary.mui-btn--raised.mui--pull-right
         i.fa.fa-plus
-        strong &nbsp; Add
+        strong &nbsp; #{polyglot.t('forms.buttons.add')}

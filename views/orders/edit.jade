@@ -12,7 +12,21 @@ block content
     // define variables
     //
     let orderData =  JSON.parse(document.getElementById('payload').dataset.order)
-    const fields = ['quantity', 'code', 'description', 'price', 'total', 'id']
+    // Translations
+    //
+    const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+    const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+    })
+    const fields = [
+      { field: 'quantity', label: polyglot.t('fields.orders_details.quantity') },
+      { field: 'code', label: polyglot.t('fields.orders_details.code') },
+      { field: 'description', label: polyglot.t('fields.orders_details.description') },
+      { field: 'price', label: polyglot.t('fields.orders_details.price') },
+      { field: 'total', label: polyglot.t('fields.orders_details.total') },
+      { field: 'id' }
+    ]
     const actions = [{ 
         url: '/orders/detail/delete/', 
         icon:  'fa-times',
@@ -22,10 +36,11 @@ block content
     // start script
     //
     $(document).ready(function(){
+      // Breadcrumb
       $('#breadcrumb').append(renderBreadcrumb([
-        { text: 'Home', href: '/'},
-        { text: 'Orders', href: '/orders'},
-        { text: 'Edit', href: '/orders/edit'}
+        { text: polyglot.t('breadcrumb.home'), href: '/'},
+        { text: polyglot.t('breadcrumb.orders'), href: '/orders'},
+        { text: polyglot.t('breadcrumb.edit'), href: '/orders/edit'}
       ]))
       $('#tableHeader').append(makeHeader(fields))
       renderDetails()
@@ -60,7 +75,7 @@ block content
           orderData.total += s.total
         }
       )
-      $('#orderTotal').text(`Order total: ${orderData.total.toLocaleString()}`)
+      $('#orderTotal').text(`${polyglot.t('views.orders_details.total')}: ${orderData.total.toLocaleString()}`)
     }
     function renderDetails() {
       orderTotalize()
@@ -78,7 +93,7 @@ block content
     //
     function activateModalQuantity() {
       modal = createModal(
-        'modalQuantity','Quantity', 
+        'modalQuantity',polyglot.t('modals.quantities'), 
         [1,2,3,4,5,6,7,8,9],
         (item) => {
           $('#quantity').val(item)
@@ -94,7 +109,7 @@ block content
       $.get("/api/products").done( 
           (data) => {
             modal = createModal(
-              'modalProduct','Product', 
+              'modalProduct',polyglot.t('modals.products'), 
               data.products.map((s) => ({
                 code: s.code,
                 description: s.description
