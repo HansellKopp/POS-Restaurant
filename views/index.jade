@@ -3,30 +3,37 @@ extends layout
 block content
     .mui-container
         .mui-row.mui--appbar-height
-            
         .mui-row
             .mui-col-md-4
                 .mui-panel
                     i.fa.fa-tags.fa-3x.mui--text-accen &nbsp; 
-                    a(href='/categories') Categories and Products   
+                    a(href='/categories') #{polyglot.t('menu.categoriesAndProducts')}
             .mui-col-md-4
                 .mui-panel
                     i.fa.fa-database.fa-3x &nbsp;   
-                    a(href='/tables') Tables
+                    a(href='/tables') #{polyglot.t('menu.tables')}
             .mui-col-md-4
                 .mui-panel
                     i.fa.fa-edit.fa-3x &nbsp;   
-                    a(href='/orders') Orders
+                    a(href='/orders') #{polyglot.t('menu.orders')}
         .mui-row
             .mui-col-md-4
                 .mui-panel
                     i.fa.fa-user.fa-3x &nbsp; 
-                    a(href='/users') Users   
+                    a(href='/users') #{polyglot.t('menu.users')}
     script.
         // start script
         //
         $(document).ready(function(){
+            // Translations
+            //
+            const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+            const polyglot = new Polyglot({
+                phrases,
+                currentLocale
+            })
+            // Breadcrumb
             $('#breadcrumb').append(renderBreadcrumb([
-                { text: 'Home', href: '/'}
+                { text: polyglot.t('breadcrumb.home'), href: '/'}
             ]))
         })

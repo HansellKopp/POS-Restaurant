@@ -5,7 +5,10 @@ const express = require('express'),
       favicon = require('serve-favicon'),
       logger = require('morgan'),
       cookieParser = require('cookie-parser'),
-      bodyParser = require('body-parser')
+      bodyParser = require('body-parser'),
+      Polyglot = require('node-polyglot'),
+      esTranslations = require('./resources/translations/es'),
+      enTranslations = require('./resources/translations/en')
 
 const app = express()
 
@@ -18,6 +21,26 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+
+// load translations middleware
+app.use(function(req, res, next) {
+  let phrases = {}
+  let currentLocale = req.headers["accept-language"] ? req.headers["accept-language"].substr(0,2) : 'en'
+  switch(currentLocale) {
+    case 'es':
+      phrases = esTranslations
+      break;
+    default:
+      phrases = enTranslations
+      break;
+  }
+  res.polyglot = new Polyglot({
+    phrases,
+    currentLocale
+  })
+  next()
+})
 
 // frontend routes
 //

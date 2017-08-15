@@ -4,21 +4,20 @@ form#user.mui-form
       i.fa.fa-user-circle-o
       span &nbsp; 
       = title
-      
   .mui-textfield
     input(type="text", name="username", value=user.username required autofocus)
-    label username
+    label #{polyglot.t('fields.users.username')}
     span#error-username.mui--text-danger.errorField
   .mui-textfield
     input(type="text", name="email", value=user.email required)
-    label email
+    label #{polyglot.t('fields.users.email')}
     span#error-email.mui--text-danger.errorField
   .mui-textfield
     input(type="password", name="password", value=user.password required)
-    label password
+    label #{polyglot.t('fields.users.password')}
     span#error-password.mui--text-danger.errorField
   input(type='hidden' name='id' value=user.id id='id')
   button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
     i.fa.fa-floppy-o 
-    strong &nbsp; Save
+    strong &nbsp; #{polyglot.t('forms.buttons.save')}
     

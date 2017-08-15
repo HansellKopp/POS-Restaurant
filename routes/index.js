@@ -4,10 +4,10 @@ var models  = require('../models')
 var express = require('express')
 var router  = express.Router()
 
-
 router.get('/', function(req, res) {
     res.render('index', {
-     title: 'POS-Restaurants',
+     title: res.polyglot.t('nav.app_name'),
+     polyglot: res.polyglot
     })
 })
 

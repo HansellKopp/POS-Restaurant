@@ -6,10 +6,17 @@ block content
     // Start script
     //
     $(document).ready(function(){
+      // translations
+      //
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
       $('#breadcrumb').append(renderBreadcrumb([
-          { text: 'Home', href: '/'},
-          { text: 'Users', href: '/users'},
-          { text: 'Create', href: '/users/create'}
+          { text: polyglot.t('breadcrumb.home'), href: '/'},
+          { text: polyglot.t('breadcrumb.users'), href: '/users'},
+          { text: polyglot.t('breadcrumb.create'), href: '/users/create'}
       ]))
       $( "#user" ).submit( (event) => {
         event.preventDefault()

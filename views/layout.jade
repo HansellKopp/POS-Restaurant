@@ -12,24 +12,26 @@ html
     link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src="/javascripts/jquery-2.2.0.min.js")
+    script(src="/javascripts/polyglot.min.js")
   body.hide-sidedrawer
+    #polyglot(data-polyglot=polyglot)
     #sidedrawer.mui--no-user-select
       #sidedrawer-brand.mui--appbar-line-height
         span.mui--text-title Hansell Kopp
       .mui-divider
         ul
           li
-            strong Files
+            strong #{polyglot.t('nav.files')}
             ul
               li
-                a(href="/init-database") Initialize Database      
+                a(href="/init-database") #{polyglot.t('nav.init_db')}
     header#header
       .mui-appbar.mui--appbar-line-height
         .mui-container-fluid
           a.sidedrawer-toggle.mui--visible-xs-inline-block.mui--visible-sm-inline-block.js-show-sidedrawer ☰
           a.sidedrawer-toggle.mui--hidden-xs.mui--hidden-sm.js-hide-sidedrawer ☰
             span.mui--text-title.mui--visible-xs-inline-block Hansell Kopp
-          POS Restaurant
+          = title
       .breadcrumb-container
         ul#breadcrumb
     #content-wrapper
@@ -45,3 +47,13 @@ html
   script(src="/javascripts/moment-with-locales.min.js")
   script(src="/javascripts/index.js")
   script(src="/javascripts/components.js")
+  script.
+    $(document).ready(function(){
+      // Translations
+      //
+      const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+      const polyglot = new Polyglot({
+          phrases,
+          currentLocale
+      })
+    })

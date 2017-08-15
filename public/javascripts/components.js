@@ -147,7 +147,7 @@ function makeCol(cols) {
 
 // Table capion
 //
-function makeCaption(title, icon) {
+function makeCaption(title, icon, addButtonCaption, searchPlaceholder) {
     var fragment = document.createDocumentFragment();
     var container = makeContainer()
     var row = makeRow()
@@ -164,13 +164,13 @@ function makeCaption(title, icon) {
     container.appendChild(row)
     var row = makeRow()
     col = new makeCol(10)
-    var inputBox = makeInputBox('search','fa fa-search')
+    var inputBox = makeInputBox(searchPlaceholder,'fa fa-search')
     col.appendChild(inputBox)
     row.appendChild(col)
     col = new makeCol(2)
     col.appendChild(makeActionButton(
                 'fa-plus', 'mui--text-primary',
-                'add',
+                addButtonCaption,
                 onAddClick
             )
     )
@@ -186,13 +186,12 @@ function makeCaption(title, icon) {
 function makeHeader(item) {
     var fragment = document.createDocumentFragment();
     var row = document.createElement('tr')
-    $.each(item, function(key, value) {
+    $.each(item, function(key,value) {
         var cell = document.createElement('th')
-        if(value !== 'id') {
-          cell.appendChild(document.createTextNode(value.toUpperCase()))
-        } else {
-          
-        }
+        if(value.field) {
+          let caption = value.label.toUpperCase()
+          cell.appendChild(document.createTextNode(caption))
+        } 
         row.appendChild(cell);
     })
     fragment.appendChild(row)
@@ -203,18 +202,17 @@ function makeHeader(item) {
 //
 function makeBody(fields, data, actions) {
     var fragment = document.createDocumentFragment()
-    $.each(data, function(key, value) {
+    $.each(data, function(rowKey, value) {
         var row = document.createElement('tr')
-        $.each(fields, function(index, key) {
-            var childValue = value[key]
+        $.each(fields, function(index, fieldKey) {
             var cell = document.createElement('td')
-            if(key !== 'id') {
+            if(fieldKey.field) {
                 // fill data columns
-                cell.appendChild(document.createTextNode(childValue))
-                cell.className = isNaN(childValue) ? '' : 'mui--text-center'
+                cell.appendChild(document.createTextNode(value[fieldKey.field]))
+                cell.className = isNaN(value[fieldKey.field]) ? '' : 'mui--text-center'
                 row.appendChild(cell);
             } else {
-            // create actions buttons
+                // create actions buttons
                 var span = document.createElement('span')
                 span.className = 'mui--pull-right'
                 actions.forEach( (action) => {

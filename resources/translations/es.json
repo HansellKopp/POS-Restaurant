@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "files": "Archivos",
+    "init_db": "Inicializar BD",
+    "app_name": "Punto de Venta Restaurante"
+  },
+  "views": {
+    "users": {
+      "list": "Listado de usuarios",
+      "create": "Crear usuario",
+      "edit": "Editar usuario"
+    },
+    "tables": {
+      "list": "Listado de mesas",
+      "create": "Crear mesa",
+      "edit": "Editar mesa"
+    },
+    "orders": {
+      "list": "Listado Mesas con pedidos",
+      "create": "Crear pedido",
+      "edit": "Editar pedidos"
+    }
+  },
+  "menu": {
+    "categoriesAndProducts": "Categorias y Productos",
+    "tables": "Mesas",
+    "orders": "Mesas abiertas",
+    "users": "Usuarios"
+  },
+  "breadcrumb": {
+    "home": "Inicio",
+    "users": "Usuarios",
+    "edit": "Editar",
+    "create":"Crear",
+    "tables": "Mesas",
+    "products": "Productos",
+    "categories": "Categorias",
+    "orders": "Mesas Abiertas"
+  },
+  "fields": {
+    "users": {
+      "username": "Usuario",
+      "email": "Email",
+      "password": "Contraseña"
+    },
+    "tables": {
+      "place": "Ubicacion",
+      "number": "Numero Mesa",
+      "seats": "Puestos"
+    },
+    "categories": {
+      "description": "Descripcion"
+    },
+    "products": {
+      "code": "Codigo",
+      "description": "Descripcion",
+      "image_url": "URL Imagen",
+      "price": "Precio"
+    },
+    "orders_details": {
+      "quantity": "Cantidad",
+      "code": "Codigo",
+      "description": "Descripcion",
+      "price": "Precio",
+      "total": "Total"
+    }
+  },
+  "forms": {
+    "buttons": {
+      "add": "Nuevo",
+      "save": "Guardar"
+    },
+    "placeholders": {
+      "search": "buscar"
+    }
+  },
+  "modals": {
+    "tables": "Mesas",
+    "quantities": "Cantidad",
+    "products": "Productos"
+  }
+}

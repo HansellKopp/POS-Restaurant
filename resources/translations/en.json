@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "files": "Files",
+    "init_db": "Init BD",
+    "app_name": "POS Restaurant"
+  },
+  "views": {
+    "users": {
+      "list": "User list",
+      "create": "Create User",
+      "edit": "Edit User"
+    },
+    "tables": {
+      "list": "Tables list",
+      "create": "Create table",
+      "edit": "Edit table"
+    },
+    "orders": {
+      "list": "Order list",
+      "create": "Create order",
+      "edit": "Edit order"
+    }
+  },
+  "menu": {
+    "categoriesAndProducts": "Categories and products",
+    "tables": "Tables",
+    "orders": "Open Orders",
+    "users": "Users"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "users": "Users",
+    "edit": "Edit",
+    "create":"Create",
+    "tables": "Tables",
+    "products": "Products",
+    "categories": "Categories",
+    "orders": "Open Orders"
+  },
+  "fields": {
+    "users": {
+      "username": "User",
+      "email": "Email",
+      "password": "Password"
+    },
+    "tables": {
+      "place": "Place",
+      "number": "Table number",
+      "seats": "seats"
+    },
+    "categories": {
+      "description": "Descripcion"
+    },
+    "products": {
+      "code": "Code",
+      "description": "Description",
+      "image_url": "Image URL",
+      "price": "Price"
+    },
+    "orders_details": {
+      "quantity": "Quantity",
+      "code": "Code",
+      "description": "Description",
+      "price": "Price",
+      "total": "Total"
+    }
+  },
+  "forms": {
+    "buttons": {
+      "add": "New",
+      "save": "Save"
+    },
+    "placeholders": {
+      "search": "Search"
+    }
+  },
+  "modals": {
+    "tables": "Tables",
+    "quantities": "Quantities",
+    "products": "Products"
+  }
+}

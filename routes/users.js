@@ -13,8 +13,9 @@ router.get('/', function(req, res) {
       ['username','ASC']
     ]
   }).then(function(users) {
-    res.render('./users/index', {
-      title: 'Users list',
+      res.render('./users/index', {
+      title: res.polyglot.t('views.users.list'),
+      polyglot: res.polyglot,
       users: users
     })
   })
@@ -24,7 +25,8 @@ router.get('/', function(req, res) {
 //
 router.get('/create', function(req, res) {
     res.render('./users/create', {
-      title: 'Create user',
+      polyglot: res.polyglot,
+      title: res.polyglot.t('views.users.create'),
       user: ['username','email','password'],
       errors: ''
     })
@@ -38,7 +40,8 @@ router.get('/edit/:user_id', function(req, res) {
       id
     ).then(function(user) {
       res.render('./users/edit', {
-        title: 'Edit user',
+        polyglot: res.polyglot,
+        title: res.polyglot.t('views.users.edit'),
         user: user,
         errors: ''
       })
