@@ -8,7 +8,8 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       Polyglot = require('node-polyglot'),
       esTranslations = require('./resources/translations/es'),
-      enTranslations = require('./resources/translations/en')
+      enTranslations = require('./resources/translations/en'),
+      deTranslations = require('./resources/translations/de')
 
 const app = express()
 
@@ -30,6 +31,9 @@ app.use(function(req, res, next) {
   switch(currentLocale) {
     case 'es':
       phrases = esTranslations
+      break;
+    case 'de':
+      phrases = deTranslations
       break;
     default:
       phrases = enTranslations

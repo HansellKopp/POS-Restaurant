@@ -1,0 +1,98 @@
+{
+  "nav": {
+    "files": "Dateien",
+    "init_db": "Init BD",
+    "app_name": "POS Restaurant",
+    "app_message": "Mit ♥ in %{city} gemacht"
+  },
+  "views": {
+    "users": {
+      "list": "Benutzern liste",
+      "create": "Benutzer erstellen",
+      "edit": "Benutzer bearbeiten"
+    },
+    "tables": {
+      "list": "Tischeliste",
+      "create": "Tisch erstellen",
+      "edit": "Tisch bearbeiten"
+    },
+    "orders": {
+      "list": "Bestellungen Liste",
+      "create": "Bestellung erstellen",
+      "edit": "Bestellung bearbeiten"
+    },
+    "orders_details": {
+      "new": "Neues Produkt",
+      "total": "Summe"
+    },
+    "categories": {
+      "list": "Kategorien Liste",
+      "create": "Kategorie erstellen",
+      "edit": "Kategorie bearbeiten",
+      "not_found": "Kategorie nicht gefunden",
+      "products": {
+        "list": "Produkte Liste",
+        "create": "Produkt erstellen",
+        "edit": "Produkt bearbeiten"
+      }
+    }
+  },
+  "menu": {
+    "categoriesAndProducts": "Kategorien und Produkte",
+    "tables": "Tische",
+    "orders": "Offene Bestelungen",
+    "users": "Benutzern"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "users": "Benutzern",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "tables": "Tische",
+    "products": "Produkte",
+    "categories": "Kategorien",
+    "orders": "Offene Aufträge"
+  },
+  "fields": {
+    "users": {
+      "username": "Benutzer",
+      "email": "email",
+      "password": "Passwort"
+    },
+    "tables": {
+      "place": "Platz",
+      "number": "Tabellennummer",
+      "seats": "Sitze"
+    },
+    "categories": {
+      "description": "Beschreibung"
+    },
+    "products": {
+      "code": "Code",
+      "description": "Beschreibung",
+      "image_url": "Bild-URL",
+      "price": "Preis"
+    },
+    "orders_details": {
+      "quantity": "Menge",
+      "code": "Code",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "total": "Gesamt"
+    }
+  },
+  "forms": {
+    "buttons": {
+      "add": "hinzufügen",
+      "save": "Speichern"
+    },
+    "placeholders": {
+      "search": "suchen"
+    }
+  },
+  "modals": {
+    "tables": "Tische",
+    "quantities": "Mengen",
+    "products": "Produkte"
+  }
+}
