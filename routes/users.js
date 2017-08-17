@@ -8,7 +8,7 @@ var router  = express.Router()
 //
 router.get('/', function(req, res) {
   models.User.findAll({
-    attributes: ['username','email','id'],
+    attributes: ['username','user_type','email','id'],
     order: [
       ['username','ASC']
     ]
@@ -27,7 +27,7 @@ router.get('/create', function(req, res) {
     res.render('./users/create', {
       polyglot: res.polyglot,
       title: res.polyglot.t('views.users.create'),
-      user: ['username','email','password'],
+      user: ['username','user_type','email','password'],
       errors: ''
     })
 })

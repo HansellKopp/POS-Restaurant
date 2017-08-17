@@ -8,6 +8,10 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true, 
       }
     },
+    user_type: {
+        type:   DataTypes.STRING,
+        values: ['super-user', 'admin', 'user']
+     },
     email: {
       type: DataTypes.STRING,
       unique: true,

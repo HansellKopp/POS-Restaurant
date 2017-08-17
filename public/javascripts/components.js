@@ -75,11 +75,12 @@ $.handleErrors = function(err) {
 
 // Autocomplete render input options
 // 
-function renderOptions(element,data) {
+function renderOptions(element,data, field) {
     var items = document.createDocumentFragment()
-    $.each(data.places, (key, value) => {
+    $.each(data, (key, value) => {
+        console.log(key, value)
         var option = document.createElement('option')
-        option.setAttribute('value', value.place)
+        option.setAttribute('value',field ? value[field]: value)
         items.appendChild(option)
     })
     element.append(items)

@@ -3,7 +3,7 @@
     "files": "Files",
     "init_db": "Init BD",
     "app_name": "POS Restaurant",
-    "app_message": "Made with ♥ in"
+    "app_message": "Made with ♥ in %{city}"
   },
   "views": {
     "users": {
@@ -56,6 +56,7 @@
   "fields": {
     "users": {
       "username": "User",
+      "user_type": "Type",
       "email": "Email",
       "password": "Password"
     },

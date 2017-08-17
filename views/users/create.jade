@@ -19,6 +19,9 @@ block content
           { text: polyglot.t('breadcrumb.users'), href: '/users'},
           { text: polyglot.t('breadcrumb.create'), href: '/users/create'}
       ]))
+      // render user_types
+      //
+      renderOptions($('#usertypes'), ['superuser','admin','user'])
       $( "#user" ).submit( (event) => {
         event.preventDefault()
         $.post(

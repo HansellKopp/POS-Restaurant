@@ -7,7 +7,6 @@ block content
     //
     const form = $('#table')
     const id = $('#id').val()
-    const places = $('#places')
     // Start script
     //
     $(document).ready(function(){
@@ -28,7 +27,7 @@ block content
       // render places autocomplete options
       //
       $.get("/api/tables/places", (data) => {
-        renderOptions(places, data)
+        renderOptions( $('#places'), data.places, 'place')
       })
 
       // handle submit post event

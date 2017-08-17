@@ -8,7 +8,7 @@ var router  = express.Router()
 //
 router.get('/', function(req, res) {
   models.User.findAll({
-    attributes: ['username','email','id'],
+    attributes: ['username','user_type', 'email','id'],
     order: [
       ['username','ASC']
     ]
@@ -25,6 +25,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   models.User.create({
         username: req.body.username,
+        user_type: req.body.user_type,
         email: req.body.email,
         password: req.body.password
   }).then(function(data) {
@@ -56,11 +57,12 @@ router.put('/:user_id', function(req, res) {
   models.User.update(
     { 
       username: req.body.username,
+      user_type: req.body.user_type,
       email: req.body.email,
       password: req.body.password
     },
     {
-      fields: ['username', 'email', 'password'],
+      fields: ['username', 'user_type','email', 'password'],
       where: {
         id: req.params.user_id
       }

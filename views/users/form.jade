@@ -9,6 +9,10 @@ form#user.mui-form
     label #{polyglot.t('fields.users.username')}
     span#error-username.mui--text-danger.errorField
   .mui-textfield
+    input(list="usertypes", name="user_type", value=user.user_type required)
+    datalist#usertypes
+    label #{polyglot.t('fields.users.user_type')}
+  .mui-textfield
     input(type="text", name="email", value=user.email required)
     label #{polyglot.t('fields.users.email')}
     span#error-email.mui--text-danger.errorField

@@ -25,7 +25,7 @@ block content
       // render places autocomplete options
       //
       $.get("/api/tables/places", (data) => {
-        renderOptions(places, data)
+        renderOptions( $('#places'), data.places, 'place')
       })
 
       // handle submit post event

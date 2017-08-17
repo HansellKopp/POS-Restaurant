@@ -23,6 +23,7 @@ block content
           { text: polyglot.t('breadcrumb.users'), href: '/users'},
           { text: polyglot.t('breadcrumb.edit'), href: `/users/edit/${id}`}
       ]))
+      renderOptions($('#usertypes'), ['superuser','admin','user'])
       form.submit(function( event ){
         event.preventDefault()
         $.put(
