@@ -3,7 +3,9 @@
     "files": "Dateien",
     "init_db": "Init BD",
     "app_name": "POS Restaurant",
-    "app_message": "Mit ♥ in %{city} gemacht"
+    "app_message": "Mit ♥ in %{city} gemacht",
+    "login": "Anmelden",
+    "logout": "Abmelden"
   },
   "views": {
     "users": {
@@ -85,7 +87,8 @@
   "forms": {
     "buttons": {
       "add": "hinzufügen",
-      "save": "Speichern"
+      "save": "Speichern",
+      "submit": "senden"
     },
     "placeholders": {
       "search": "suchen"

@@ -6,6 +6,7 @@ const express = require('express'),
       logger = require('morgan'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
+      helmet = require('helmet'),
       Polyglot = require('node-polyglot'),
       esTranslations = require('./resources/translations/es'),
       enTranslations = require('./resources/translations/en'),
@@ -14,13 +15,21 @@ const express = require('express'),
 const app = express()
 
 // view engine setup
+//
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
+// Set the secret for encoding/decoding JWT tokens
+// - pending use env settings
+app.set('jwtTokenSecret', '53crE7')
+
+// Use express modules
+//
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(helmet())
 app.use(express.static(path.join(__dirname, 'public')))
 
 
@@ -64,12 +73,14 @@ app.use('/Orders', orders)
 // api routes
 //
 const
+  authApi = require('./routes/api/auth'),
   usersApi = require('./routes/api/users'),
   tablesApi = require('./routes/api/tables'),
   ordersApi = require('./routes/api/orders'),
   productsApi = require('./routes/api/products'),
   categoriesApi = require('./routes/api/categories')
 
+app.use('/api/auth', authApi)
 app.use('/api/users', usersApi)
 app.use('/api/tables', tablesApi)
 app.use('/api/orders', ordersApi)

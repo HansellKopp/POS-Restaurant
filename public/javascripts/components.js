@@ -54,6 +54,7 @@ $.handleErrors = function(err) {
     switch(err.status) {
         case 500 :
             let errors = JSON.parse(err.responseText)
+            console.log(errors)
             message= 'Validation errors'
             errors.msg.forEach(function(a) {
                 let fieldError = document.getElementById(`error-${a.path}`)
@@ -86,6 +87,24 @@ function renderOptions(element,data, field) {
     element.append(items)
 }
 
+// Render menu option
+//
+function renderMenu(faIcon, caption, href) {
+    var row = document.createElement('div')
+    row.className = 'mui-col-md-4'
+    var panel = document.createElement('div')
+    panel.className = 'mui-panel'
+    var icon = document.createElement('i')
+    icon.className += `fa fa-3x mui--text-accent ${faIcon}`
+    var a = document.createElement('a')
+    a.href= href
+    a.appendChild(document.createTextNode(`${caption}`))
+    panel.appendChild(icon)
+    panel.appendChild(document.createTextNode(' '))
+    panel.appendChild(a)
+    row.appendChild(panel)
+    return row
+}
 // Breadcrumb
 //
 function renderBreadcrumb(options) {
@@ -307,6 +326,7 @@ function createModal(modalId, caption, data, eventListener) {
     mui.overlay('on',modal)
     return modal
 }
+
 // Render modal window selection element
 //
 function renderElement(item, eventListener){
@@ -330,3 +350,29 @@ function renderElement(item, eventListener){
     button.addEventListener('click',() => eventListener(item))
     return button
 }
+
+// Forms components
+  function createIcon(icon, size = '') {
+    var i = document.createElement('i')
+    i.className = `fa ${icon} ${size}`
+    return i
+  }
+
+  function createButton(icon, onClick) {
+    var button = document.createElement('button')
+    button.className = 'mui-btn mui-btn--small'
+    button.appendChild(createIcon(icon))
+    button.addEventListener('click', onClick)
+    return button
+  }
+
+  function createFormField(type, name, placeholder = '', required = false, autofocus = false) {
+    var input = document.createElement('input')
+    input.type = type
+    input.name = name
+    input.required = required
+    input.autofocus = autofocus
+    input.placeholder = placeholder
+    input.className = 'inlineTextField'
+    return input
+  }

@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+    #payload(data-users=users, data-title=title)
+    form#login.mui-form
+        legend 
+            h2
+            i.fa.fa-user-circle-o
+            span &nbsp; 
+            = title
+        .mui-textfield
+            input(type="text", name="email" required autofocus)
+            label #{polyglot.t('fields.users.email')}
+            span#error-email.mui--text-danger.errorField
+        .mui-textfield
+            input(type="password", name="password",required)
+            label #{polyglot.t('fields.users.password')}
+            span#error-password.mui--text-danger.errorField
+        button(type="submit")#submit-button.mui-btn.mui-btn--raised.mui--pull-right
+            i.fa.fa-floppy-o 
+            strong &nbsp; #{polyglot.t('forms.buttons.submit')}
+    script.
+        // start script
+        $(document).ready(function(){
+            // Translations
+            //
+            const login = $('#login')
+            const { phrases, currentLocale } = JSON.parse(document.getElementById('polyglot').dataset.polyglot)
+            const polyglot = new Polyglot({
+                phrases,
+                currentLocale
+            })
+            // Breadbrumb
+            $('#breadcrumb').append(renderBreadcrumb([
+                { text: polyglot.t('breadcrumb.home'), href: '/'},
+                { text: polyglot.t('breadcrumb.login'), href: '/login'}
+            ]))
+            login.submit( (event) => {
+                event.preventDefault()
+                $.post(
+                    "/api/auth/login",
+                    login.serialize()
+                    ).done( (data) =>  {
+                        window.localStorage.setItem('user', JSON.stringify(data))
+                        window.location.href = `/`
+                    }
+                ).fail( (err)=> 
+                    swal("Authentication error!",'Invalid email or password', "error")
+                )
+            })
+        })
+    

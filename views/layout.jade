@@ -32,6 +32,8 @@ html
           a.sidedrawer-toggle.mui--hidden-xs.mui--hidden-sm.js-hide-sidedrawer ☰
             span.mui--text-title.mui--visible-xs-inline-block Hansell Kopp
           = title
+            span.mui--pull-right
+              #loginMenu
       .breadcrumb-container
         ul#breadcrumb
     #content-wrapper
@@ -47,6 +49,7 @@ html
   script(src="/javascripts/moment-with-locales.min.js")
   script(src="/javascripts/index.js")
   script(src="/javascripts/components.js")
+  script(src="/javascripts/storage.js")
   script.
     $(document).ready(function(){
       // Translations
@@ -56,4 +59,45 @@ html
           phrases,
           currentLocale
       })
+      // Login logout 
+      //
+      const user = storage.get('user')
+      const loginMenu = $('#loginMenu')
+      if(user) {
+        loginMenu.append(makeActionButton(
+          'fa-user', 'mui--text-primary',
+                'logout',
+                () => {
+                  storage.clear('user')
+                  window.location.href  = '/'
+                }
+        )) 
+        } else {
+          loginMenu.append(loginForm())
+        }
+        $('#loginForm').submit( (event) => {
+                event.preventDefault()
+                $.post(
+                    "/api/auth/login",
+                    $('#loginForm').serialize()
+                    ).done( (data) =>  {
+                        window.localStorage.setItem('user', JSON.stringify(data))
+                        window.location.href = `/`
+                    }
+                ).fail( (err)=> 
+                    swal("Authentication error!",'Invalid email or password', "error")
+                )
+        })
     })
+
+    function loginForm() {
+      var form = document.createElement('form')
+      form.id = 'loginForm'
+      form.appendChild(createFormField('email','email','email', true, true))
+      form.appendChild(createFormField('password','password','password', true))
+      form.appendChild(makeActionButton(
+            'fa-user', 'mui--text-primary',
+                'login'
+          ))
+      return form
+    }

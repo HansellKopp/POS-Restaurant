@@ -3,7 +3,9 @@
     "files": "Archivos",
     "init_db": "Inicializar BD",
     "app_name": "Punto de Venta Restaurante",
-    "app_message": "Hecho con ♥ en %{city}"
+    "app_message": "Hecho con ♥ en %{city}",
+    "login": "Ingresar",
+    "logout": "Salir"
   },
   "views": {
     "users": {
@@ -51,7 +53,8 @@
     "tables": "Mesas",
     "products": "Productos",
     "categories": "Categorias",
-    "orders": "Mesas Abiertas"
+    "orders": "Mesas Abiertas",
+    "login": "Ingresar"
   },
   "fields": {
     "users": {
@@ -85,7 +88,8 @@
   "forms": {
     "buttons": {
       "add": "Nuevo",
-      "save": "Guardar"
+      "save": "Guardar",
+      "submit": "enviar"
     },
     "placeholders": {
       "search": "buscar"

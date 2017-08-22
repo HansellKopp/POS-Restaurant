@@ -1,12 +1,19 @@
 'use strict'
 
-var models  = require('../models')
-var express = require('express')
-var router  = express.Router()
+const models  = require('../models')
+const express = require('express')
+const router  = express.Router()
 
 router.get('/', function(req, res) {
     res.render('index', {
      title: res.polyglot.t('nav.app_name'),
+     polyglot: res.polyglot
+    })
+})
+
+router.get('/login', (req, res) => {
+    res.render('users/login', {
+     title: res.polyglot.t('nav.login'),
      polyglot: res.polyglot
     })
 })

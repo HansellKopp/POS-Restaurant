@@ -3,7 +3,8 @@
     "files": "Files",
     "init_db": "Init BD",
     "app_name": "POS Restaurant",
-    "app_message": "Made with ♥ in %{city}"
+    "app_message": "Made with ♥ in %{city}",
+    "login": "Login"
   },
   "views": {
     "users": {
@@ -41,7 +42,9 @@
     "categoriesAndProducts": "Categories and products",
     "tables": "Tables",
     "orders": "Open Orders",
-    "users": "Users"
+    "users": "Users",
+    "login": "login",
+    "logout": "logout"
   },
   "breadcrumb": {
     "home": "Home",
@@ -51,7 +54,8 @@
     "tables": "Tables",
     "products": "Products",
     "categories": "Categories",
-    "orders": "Open Orders"
+    "orders": "Open Orders",
+    "login": "Login"
   },
   "fields": {
     "users": {
@@ -85,7 +89,8 @@
   "forms": {
     "buttons": {
       "add": "New",
-      "save": "Save"
+      "save": "Save",
+      "submit": "submit"
     },
     "placeholders": {
       "search": "Search"

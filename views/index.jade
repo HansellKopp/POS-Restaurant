@@ -1,26 +1,10 @@
 extends layout
 
 block content
-    .mui-container
-        .mui-row.mui--appbar-height
+    .mui-row.mui--appbar-height
+    #container.mui-container
         .mui-row
-            .mui-col-md-4
-                .mui-panel
-                    i.fa.fa-tags.fa-3x.mui--text-accen &nbsp; 
-                    a(href='/categories') #{polyglot.t('menu.categoriesAndProducts')}
-            .mui-col-md-4
-                .mui-panel
-                    i.fa.fa-database.fa-3x &nbsp;   
-                    a(href='/tables') #{polyglot.t('menu.tables')}
-            .mui-col-md-4
-                .mui-panel
-                    i.fa.fa-edit.fa-3x &nbsp;   
-                    a(href='/orders') #{polyglot.t('menu.orders')}
-        .mui-row
-            .mui-col-md-4
-                .mui-panel
-                    i.fa.fa-user.fa-3x &nbsp; 
-                    a(href='/users') #{polyglot.t('menu.users')}
+            #op
     script.
         // start script
         //
@@ -36,4 +20,42 @@ block content
             $('#breadcrumb').append(renderBreadcrumb([
                 { text: polyglot.t('breadcrumb.home'), href: '/'}
             ]))
+            const user = storage.get('user')
+            if(user) {
+                $('#op').append(renderMenu('fa-tags',
+                        polyglot.t('menu.categoriesAndProducts'),
+                        '/categories'))
+                $('#op').append(renderMenu('fa-database',
+                        polyglot.t('menu.tables'),
+                        '/tables'))
+                $('#op').append(renderMenu('fa-edit',
+                        polyglot.t('menu.orders'),
+                        '/orders'))
+                $('#op').append(renderMenu('fa-user',
+                        polyglot.t('menu.users'),
+                        '/users'))
+            } else {
+                 $('#op').append(makeIntro())
+            }
         })
+        function makeIntro() {
+                var panel = document.createElement('div')
+                panel.className = 'mui-panel'
+                var headline = document.createElement('div')
+                headline.className = 'mui--text-headline'
+                headline.appendChild(document.createTextNode('POS Restaurant'))
+                var divider = document.createElement('div')
+                divider.className = 'mui-divider'
+                var content = document.createElement('p')
+                content.appendChild(document.createTextNode(`
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
+                        aliquam ipsum sed dignissim. Sed ac accumsan odio. Vivamus tristique
+                        dignissim neque. Interdum et malesuada fames ac ante ipsum primis in
+                        faucibus. Nunc cursus felis nec purus condimentum vestibulum. Donec mauris
+                        nisi, sollicitudin eget iaculis id, suscipit id odio.
+                `))
+                panel.appendChild(headline)
+                panel.appendChild(divider)
+                panel.appendChild(content)
+                return panel
+        }

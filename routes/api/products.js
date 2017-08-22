@@ -25,14 +25,14 @@ router.get('/', function(req, res) {
 // retrieve product by id
 //
 router.get('/code/:product_code', function(req, res) {
-  models.Product.findAll({
+  models.Product.find({
     attributes: ['code','description','price','id'],
     where: {
       code: req.params.product_code
     }
   })
-    .then(function(products) {
-        res.status(200).json({'product': products[0]})
+    .then(function(product) {
+        res.status(200).json({product})
     })
     .catch(function(err){
         res.status(500).json({'msg': err})

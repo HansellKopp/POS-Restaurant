@@ -1,9 +1,12 @@
 'use strict'
 
-var models  = require('../models')
-var express = require('express')
-var router  = express.Router()
+const models  = require('../models')
+const jwtauth = require('../lib/jwtauth')
+const express = require('express')
+const router  = express.Router()
 
+// auth middleware
+router.use(jwtauth)
 // route users/ 
 //
 router.get('/', function(req, res) {
