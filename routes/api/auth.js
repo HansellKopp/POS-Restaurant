@@ -25,7 +25,8 @@ router.post('/login', function(req, res) {
           exp: expires
         }, 
         secret
-      )						
+      )				
+      res.setHeader('Set-Cookie',`access_token=${token}`)	
       res.status(200).json({
         token : token,
         expires : expires,
