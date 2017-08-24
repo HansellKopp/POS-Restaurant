@@ -20,7 +20,7 @@ block content
             $('#breadcrumb').append(renderBreadcrumb([
                 { text: polyglot.t('breadcrumb.home'), href: '/'}
             ]))
-            const user = storage.get('user')
+            const user = getCookieJSON('token').user            
             if(user) {
                 $('#op').append(renderMenu('fa-tags',
                         polyglot.t('menu.categoriesAndProducts'),
@@ -48,11 +48,7 @@ block content
                 divider.className = 'mui-divider'
                 var content = document.createElement('p')
                 content.appendChild(document.createTextNode(`
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
-                        aliquam ipsum sed dignissim. Sed ac accumsan odio. Vivamus tristique
-                        dignissim neque. Interdum et malesuada fames ac ante ipsum primis in
-                        faucibus. Nunc cursus felis nec purus condimentum vestibulum. Donec mauris
-                        nisi, sollicitudin eget iaculis id, suscipit id odio.
+                        Demo: super@pos.com / super
                 `))
                 panel.appendChild(headline)
                 panel.appendChild(divider)

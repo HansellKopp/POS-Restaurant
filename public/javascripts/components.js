@@ -74,6 +74,23 @@ $.handleErrors = function(err) {
     swal("Error on saving!",`${err.status} ${message}`, "error")    
 }
 
+//
+function getCookieJSON(cname)  {
+    var name = cname + "="
+    var decodedCookie = decodeURIComponent(document.cookie)
+    var ca = decodedCookie.split(';')
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1)
+        }
+        if (c.indexOf(name) == 0) {
+            return JSON.parse(c.substring(name.length, c.length))
+        }
+    }
+    return {};
+}
+
 // Autocomplete render input options
 // 
 function renderOptions(element,data, field) {

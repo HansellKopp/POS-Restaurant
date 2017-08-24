@@ -61,17 +61,14 @@ html
       })
       // Login logout 
       //
-      const user = storage.get('user')
+      const user = getCookieJSON('token').user
       const loginMenu = $('#loginMenu')
       if(user) {
         loginMenu.append(makeActionButton(
           'fa-user', 'mui--text-primary',
-                'logout',
-                () => {
-                  storage.clear('user')
-                  window.location.href  = '/'
-                }
-        )) 
+          `logout ${user.username}`,
+           () => {$.get("/api/auth/logout").done(() => window.location.href = '/') }
+        ))
         } else {
           loginMenu.append(loginForm())
         }
@@ -81,7 +78,6 @@ html
                     "/api/auth/login",
                     $('#loginForm').serialize()
                     ).done( (data) =>  {
-                        window.localStorage.setItem('user', JSON.stringify(data))
                         window.location.href = `/`
                     }
                 ).fail( (err)=> 
