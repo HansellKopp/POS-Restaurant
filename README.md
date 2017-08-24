@@ -40,4 +40,5 @@
     *docker rmi -f $(docker images -q)
   
 ## Create environment variable for postgres
-  * export DATABASE_URL=postgres://postgres:admin@localhost:5432/postgres
+  * bash export DATABASE_URL=postgres://postgres:admin@localhost:5432/postgres
+  * powershell $env:DATABASE_URL = "postgres://postgres:admin@192.168.99.100:5432/postgres"
